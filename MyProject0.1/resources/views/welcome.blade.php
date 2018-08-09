@@ -26,20 +26,27 @@
 </head>
 
 
-<body Style="background:black;">
+<body Style="background-image: url(images/Mainpage/Frontpage.png);">
 
-<!--Carrousel-->
-
-
-
-<!--Ending Caroussel-->
-<div >
-<tr>
 
 <!--Main Login-->
-	<div class="container">
+<div>
+
+<body>
+
+		<div Style="
+
+		position: absolute;
+
+				margin:30%;
+				margin-top:15%;
+				width:50%;
+
+
+"
+		>
 	    <div class="row justify-content-center">
-	        <div class="col-md-8">
+					        <div class="col-md-8">
 	            <div class="card">
 	                <div class="card-header">{{ __('Login') }}</div>
 
@@ -104,9 +111,7 @@
 	        </div>
 	    </div>
 	</div>
-</tr>
-</table>
-
 </div>
+</table>
 </body>
 </html>
