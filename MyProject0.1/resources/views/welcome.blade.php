@@ -38,7 +38,7 @@
 
 		position: absolute;
 
-				margin:30%;
+				margin:25%;
 				margin-top:15%;
 				width:50%;
 
@@ -46,7 +46,7 @@
 "
 		>
 	    <div class="row justify-content-center">
-					        <div class="col-md-8">
+					        <div class="col-md-7">
 	            <div class="card">
 	                <div class="card-header">{{ __('Login') }}</div>
 
