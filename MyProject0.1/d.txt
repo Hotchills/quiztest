@@ -1,0 +1,9 @@
+﻿Started: 8/7/2018 4:09 PM
+
+/var/www/html/MyProject0.1/resources/views/welcome.blade.php - error occurred - Get operation failed since welcome.blade.php does not exist on the remote site.
+
+File activity incomplete. 1 file(s) or folder(s) were not completed.
+Files with errors: 1
+/var/www/html/MyProject0.1/resources/views/welcome.blade.php
+
+Finished: 8/7/2018 4:09 PM
