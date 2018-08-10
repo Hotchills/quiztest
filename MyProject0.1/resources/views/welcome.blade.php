@@ -26,29 +26,34 @@
 </head>
 
 
-<body Style="background-image: url(images/Mainpage/Frontpage.png);">
+<body Style= "background-color:#00a63f">
+
 
 
 <!--Main Login-->
 <div>
 
-<body>
 
 		<div Style="
+				margin:0 auto;
+				border:solid black 5px;
+				width:50%;">
 
-		position: absolute;
-
-				margin:25%;
-				margin-top:15%;
-				width:50%;
+<div Style="margin: auto;text-align: center">
+			<img src="images/Mainpage/logo.png ">
+</div>
 
 
-"
-		>
-	    <div class="row justify-content-center">
+<!--Jonas is gay trust me and alex aswell--->
+
+
+
+	    <div Style="margin: auto;;min-width:100%; border:solid black 5px;">
 					        <div class="col-md-7">
+
+
 	            <div class="card">
-	                <div class="card-header">{{ __('Login') }}</div>
+	                <div Style="text-align:center" class="card-header">{{ __('Login') }}</div>
 
 	                <div class="card-body">
 	                    <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
@@ -112,6 +117,7 @@
 	    </div>
 	</div>
 </div>
+
 </table>
 </body>
 </html>

@@ -28,7 +28,7 @@
 </head>
 
 
-<body Style="background-image: url(images/Mainpage/Frontpage.png);">
+<body Style="background-image: url(images/Mainpage/Frontpage.png);background-repeat: no-repeat;">
 
 
 <!--Main Login-->
