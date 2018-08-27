@@ -1,44 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                <h1>{{$quiz->name}}</h1>
+
+
+        <div class="quiz-box card">
+            <div class="card-header">
+                <h1>Quiz ID: <strong>{{$quiz->id}} &nbsp </strong>Quiz Name: <strong> {{$quiz->name}}</strong></h1>
                 <h1>{{$quiz->title}}</h1>
-                <h1>{{$quiz->id}}</h1>
+            </div>
+            <ul class="card-body" Style="list-style: none;">
+                @foreach($quiz->QuestionPaginate() as $question)
+                <div class="question-box">
+
+                    <li><h3><span class="badge badge-success">{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}}</strong></h3>
+
+                        <hr>
+                        {{Form::open(['route'=>'useranswer.store','method'=>'POST'])}}
+                        {{Form::textarea('useranswer','Insert answer',['class'=>'form-control textarea','rows'=>'4'])}}
+                        {{Form::hidden('question_id',$question->id)}}
+                        {{Form::hidden('user_id',1)}}
+                      <br>
+                        {{Form::submit('Submit',['class'=>'btn  question-answer-button'])}}                      
+                        {{ Form::close() }}
+                    </li>
+
                 </div>
-                <ul class="card-body">
-                  @foreach($quiz->QuestionPaginate() as $question)
-<div Style="border:3px solid #00a63f ;margin:10px;border-radius:5px;padding:25px; ">
+                @endforeach
+                <div class="container col-sm-4">
+                {{ $quiz->QuestionPaginate()->links() }}
+                </div>
+            </ul>
+            <div class=" col-sm-4">
+            <button type="button" class="btn btn-success" value="Input Button" onclick="makenewquestion()"> Add question to quiz </button>
+        </div>
+            <br>
+            </div>
 
-<li><h3><strong>{{$question->title}}</h3>
-  <hr>
-    {{Form::open(['route'=>'useranswer.store','method'=>'POST'])}}
-    {{Form::textarea('answer','Answer',['class'=>'form-control textarea','rows'=>'4'])}}
-    {{Form::hidden('question_id',$question->id)}}
-    {{Form::hidden('user_id',0)}}
-    {{Form::submit('Submit',['class'=>'btn btn-success'])}}
-    {{ Form::close() }}
-</li>
 
-</div>
-                  @endforeach
-{{ $quiz->QuestionPaginate()->links() }}
-</ul>
-
-<button type="button" class="btn btn-success" value="Input Button" onclick="makenewquestion()" >Add question to quiz</button>
-</div>
-</div>
-</div>
-</div>
 <script>
-function makenewquestion(){
+    function makenewquestion() {
 
-location.href = "{{route('CreateQuestion',['main' => $quiz->name ])}}";
-}
+        location.href = "{{route('CreateQuestion',['main' => $quiz->name ])}}";
+    }
 </script>
 
 @endsection

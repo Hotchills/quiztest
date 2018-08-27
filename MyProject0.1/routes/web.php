@@ -45,4 +45,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
 Route::get('/{main}/CreateQuestion', 'QuestionController@index')->name('CreateQuestion');
-Route::get('/{main}', 'QuizController@startquiz');
+Route::get('/{main}','QuizController@startquiz');

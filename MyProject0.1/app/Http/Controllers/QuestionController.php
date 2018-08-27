@@ -5,20 +5,18 @@ namespace App\Http\Controllers;
 use App\Question;
 use App\Quiz;
 use App\Answer;
-use App\Http\Controllers\Session;
 use Illuminate\Http\Request;
 
-class QuestionController extends Controller
-{
+class QuestionController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($main)
-    {
-      $quiztempid= Quiz::where('name', $main)->first()->id;
-            return view('/CreateQuestion', compact('quiztempid'));
+    public function index($main) {
+        $quiztempid = Quiz::where('name', $main)->first()->id;
+        return view('/CreateQuestion', compact('quiztempid'));
     }
 
     /**
@@ -26,8 +24,7 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -37,28 +34,34 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
-      $validatedData = $request->validate([
-      'title' => 'required|unique:quizzes|max:100|min:3',
-      'body' => 'max:500',
-      ]);
+        //    $validatedData = $request->validate([
+        //   'type' => 'required|unique:quizzes|max:100|min:3',
+        //     'body' => 'required|unique:quizzes|max:500|min:3',
+        //    ]);
+//Find the quiz in the DB where to put the questions
+        $quiz = Quiz::where('id', $request->id)->first();
 
-      $quiz = Quiz::where('id', $request->id)->first();
-      $answer =$request->answer;
-      $question = new Question();
-      $question->title = $request->title;
-      $question->body = $request->body;
-      $question->quiz_id=$request->id;
-      $question->question_nr=0;
-      $question->save();
+//Create new question and save all data received from the FORM in CreateQuestion.blade.php   
+        $question = new Question();
+        $question->type = $request->type;
+        $question->body = $request->body;
+        $question->quiz_id = $request->id;
+        $question->question_nr = $request->mode;
+        $question->duplicate = 0;
+        $question->quiz()->associate($quiz); // associate the question to the quiz
+        $question->save(); // save quiestion in DB
+//Create new answer , keywords.    
+        $answer = new Answer();
+        $answer->body = $request->answer;
+        $answer->aux = 0;
+        $answer->question_id = $question->id;
+        $answer->question()->associate($question); // associate the answer to the question
+        $answer->save(); // save answer in DB
 
-      $question->quiz()->associate($quiz);
 
-
-
-      return redirect('/');
+        return redirect()->back()->with('message', 'Question added');
     }
 
     /**
@@ -67,8 +70,7 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Question $question)
-    {
+    public function show(Question $question) {
         //
     }
 
@@ -78,8 +80,7 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
-    {
+    public function edit(Question $question) {
         //
     }
 
@@ -90,8 +91,7 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
-    {
+    public function update(Request $request, Question $question) {
         //
     }
 
@@ -101,8 +101,8 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
-    {
+    public function destroy(Question $question) {
         //
     }
+
 }

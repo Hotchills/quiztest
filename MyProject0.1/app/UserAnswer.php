@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserAnswer extends Model
 {
-  public $table = 'questions';
+
+  
 protected $fillable = [
   'user_id', 'question_id', 'body',
 ];
