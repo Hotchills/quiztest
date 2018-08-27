@@ -31,13 +31,15 @@
 
 
 <!--Main Login-->
+
+<!--Header-->
+
 <div>
 
 
 		<div Style="
 				margin:0 auto;
-				border:solid black 5px;
-				width:50%;">
+					width:50%;">
 
 <div Style="margin: auto;text-align: center">
 			<img src="images/Mainpage/logo.png ">
@@ -46,10 +48,11 @@
 
 <!--Jonas is gay trust me and alex aswell--->
 
+<!--Login Card-->
 
 
-	    <div Style="margin: auto;;min-width:100%; border:solid black 5px;">
-					        <div class="col-md-7">
+	
+					        <div style="margin:0 auto;width:50%;col-md-7">
 
 
 	            <div class="card">
@@ -90,7 +93,7 @@
 	                        <div class="form-group row">
 	                            <div class="col-md-6 offset-md-4">
 	                                <div class="form-check">
-	                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+	                                    <input class="form-check-input" type=1"checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
 	                                    <label class="form-check-label" for="remember">
 	                                        {{ __('Remember Me') }}
@@ -114,7 +117,7 @@
 	                </div>
 	            </div>
 	        </div>
-	    </div>
+	  
 	</div>
 </div>
 
