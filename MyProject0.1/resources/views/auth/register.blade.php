@@ -1,7 +1,9 @@
+@extends('layouts.app')
 
+@section('content')
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+
 <title>Godaddy DCOPS</title>
 
 <meta charset="utf-8">
@@ -23,31 +25,19 @@
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-</head>
 
 
-<body Style="background-image: url(images/Mainpage/Frontpage.png);background-repeat: no-repeat;">
+
+<body Style= "background-color:#00a63f"> 
 
 
 <!--Main Login-->
-<div>
-
-<body>
-
-        <div Style="
-
-        position: absolute;
-
-                margin:25%;
-                margin-top:15%;
-                width:50%;
 
 
-"
-        >
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+
+
+
+            <div class="card center_register">
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
@@ -68,9 +58,17 @@
 
                             </div>
                         </div>
+
                         <div class="form-group row">
-  {{  Form::select('location', array('SXB' => 'SXB','FRA' => 'FRA', 'STL' => 'STL', 'Leeds' => 'Leeds', 'AMS' => 'AMS'), 'SXB', ['class' => 'form-control'])}}
+                            <div class="col-md-4 col-form-label text-md-right"></div>
+
+                            <div class="col-md-6">
+                                
+                                {{  Form::select('location', array('Default' => 'Please Select A DC','SXB' => 'SXB','FRA' => 'FRA', 'STL' => 'STL', 'Leeds' => 'Leeds', 'AMS' => 'AMS'), 'Default', ['class' => 'form-control'])}}
+
+                            </div>
                         </div>
+
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -118,7 +116,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+    </body>
 
+@endsection
