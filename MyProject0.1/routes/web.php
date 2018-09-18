@@ -17,9 +17,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', function () {
-    return view('admin');
+// Button Main Page For Going to // QUESTION:
+
+Route::get('/Hiring', function () {
+    return view('Hiring');
 });
+
+// NetworkQuestionary
+
+Route::get('/NetworkQuestionary', function () {
+    return view('NetworkQuestionary');
+});
+
+Route::get('/networkResponse', function () {
+    return view('networkResponse');
+});
+
 
 Route::post('/CreateQuiz', ['uses'=> 'QuizController@store','as'=>'quiz.store' ]);
 Route::post('/CreateQuestion', ['uses'=> 'QuestionController@store','as'=>'question.store' ]);
@@ -28,8 +41,6 @@ Route::post('/AddUserAnswer', ['uses'=> 'UserAnswerController@store','as'=>'user
 
 
 Auth::routes();
-
-
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');

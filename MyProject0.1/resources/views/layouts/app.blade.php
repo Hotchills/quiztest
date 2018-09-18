@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -71,58 +70,13 @@
                 border:1px solid #00a63f;
 
             }
-
             .question-answer-button:hover,.question-answer-button:active{
                 box-shadow:0 0 0 0.2rem rgba(0, 154, 35, 0.25);
                 background-color: #00a63f;
                 color:white;
 
             }
-
-
-
-            /* end of quiz page*/
-
-
-            /*login page*/
-            .center_login {
-                
-                margin: auto;
-                width: 50%;
-                top: 80%;
-                    
-            }
-
-            .background_green {
-    
-                background-color: #00a63f;    
-          
-            }
-
-            /*login register*/
-            .center_register {
-                
-                margin: auto;
-                width: 70%;
-                top:40%;
-                                    
-            }
-
-            /*General Center*/
-            .center {
-                margin:auto;
-                width: 70%;
-                top:50%;
-                border:solid 1px;
-
-            }
-
-            /*Flip Main page*/
-
-
-
-
-                   
+            /* end of quiz page*/        
         </style>
     </head>
     <body>
@@ -149,7 +103,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}"><strong>{{ __('Login') }}</strong></a>
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}"><strong>{{ __('Register') }}</strong></a>
+                            </li>
                             @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -157,23 +113,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" href="{{ url('/admin') }}">
-                                        Control panel
-                                    </a>
-
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}  
+                                        {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                       
                                         @csrf
                                     </form>
-
-
-                                   
                                 </div>
                             </li>
                             @endguest
