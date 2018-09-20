@@ -53,15 +53,16 @@ class QuestionController extends Controller {
         $question->quiz()->associate($quiz); // associate the question to the quiz
         $question->save(); // save quiestion in DB
 //Create new answer , keywords.    
-        $answer = new Answer();
-        $answer->body = $request->answer;
-        $answer->aux = 0;
-        $answer->question_id = $question->id;
-        $answer->question()->associate($question); // associate the answer to the question
-        $answer->save(); // save answer in DB
+    //    $answer = new Answer();
+    //    $answer->body = $request->answer;
+     //   $answer->aux = 0;
+     //   $answer->question_id = $question->id;
+     //   $answer->question()->associate($question); // associate the answer to the question
+     //   $answer->save(); // save answer in DB
 
 
-        return redirect()->back()->with('message', 'Question added');
+    //    return redirect()->back()->with('message', 'Question added');
+          return redirect(route('addanswerstoquestion', ['question' => $question->id]));
     }
 
     /**

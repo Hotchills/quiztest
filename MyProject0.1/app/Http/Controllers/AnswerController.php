@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
+use App\Question;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -12,9 +13,12 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($question)
     {
         //
+        $question=Question::where('id',$question)->first();
+        
+       return view('AddAnswersToQuestion', compact('question'));
     }
 
     /**
@@ -35,7 +39,16 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     
+        //Create new answer , keywords.    
+        $answer = new Answer();
+        $answer->body = $request->answer;
+        $answer->aux = 0;
+        $answer->question_id = $question->id;
+        $answer->question()->associate($question); // associate the answer to the question
+        $answer->save(); // save answer in DB
+        
+        return redirect()->back()->with('message', 'Answer added');
     }
 
     /**

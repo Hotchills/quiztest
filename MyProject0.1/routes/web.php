@@ -22,6 +22,7 @@ Route::get('/admin', function () {
 });
 
 Route::post('/CreateQuiz', ['uses'=> 'QuizController@store','as'=>'quiz.store' ]);
+Route::post('/AddAnswersToQuestion', ['uses'=> 'AnswerController@store','as'=>'addanswers.store' ]);
 Route::post('/CreateQuestion', ['uses'=> 'QuestionController@store','as'=>'question.store' ]);
 Route::post('/AddUserAnswer', ['uses'=> 'UserAnswerController@store','as'=>'useranswer.store' ]);
 
@@ -30,6 +31,7 @@ Route::post('/AddUserAnswer', ['uses'=> 'UserAnswerController@store','as'=>'user
 Auth::routes();
 
 
+Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('addanswerstoquestion');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
