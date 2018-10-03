@@ -21,46 +21,44 @@
 </div>
 
 
-<p> Add answers : </p>
+<p> Add answers1 : </p>
 
-<input class="form-control" id="addanswers" type="text" />
-<button class="btn btn-primary" id="addanswersbutton"value="addanswersbutton" name="addanswersbutton" >AddAnswer</button>
+<ul class="list-group" >
+    
+    @foreach($question->Answers() as $answer)
 
+    <li class="row list-group-item" > 
 
-<!-- Content here -->
-<ul class="row container-fluid" id="show-answers">
+        <div class="col-sm-7 col-md-7 ">{{$answer->body}}
 
-</ul> 
+        </div>
 
-<script>
-    $(document).ready(function () {
+        <div  class="col-sm-3 col-md-3 btn-sm">
+            {{ Form::open(['method' => 'DELETE', 'route' => ['delanswer.delete', $answer->id]]) }}
+            {{Form::submit('Delete',['class'=>'btn btn-danger '])}} 
+            {{ Form::close() }}
 
-        var array = $();
-        var i = 1;
-        $("#addanswersbutton").click(function (e) {
-            e.preventDefault();
-            console.log('dsafuq');
+        </div>
+                @if($question->question_nr != $answer->id)
+        <div  class="col-sm-1 col-md-1 btn-sm">
+            {{ Form::open(['method' => 'PUT', 'route' => ['correctanswer.update', $question->id]]) }}
+            {{Form::hidden('answerid',$answer->id)}}
+            {{Form::submit('Up',['class'=>'btn btn-warning '])}} 
+            {{ Form::close() }}
+        </div>
+        @endif
 
-            var input = $('#addanswers').val();
-            var $li = $('<li class="col-sm-10 col-md-10 container"></li>');
-            $button=$('<button class="btn col-sm-2 col-md-2 pull-right removebutton" id="removebutton' + i + '">delete</button>');
-            $p= $('<h1>' + i + '.  ' + input + '</h1>');
-                    $li.append($button);
-        $li.append($p);
-            
-         //   array.push($li);
-array = array.add($button);
-            $("#show-answers").append(array);
-            i++;
+    </li>
 
-        });
-         console.log('nok');
-        $(".removebutton").click(function (e) {
+    @endforeach
+</ul>
+{{Form::open(['route'=>'addanswers.store','method'=>'POST'])}}
+{{Form::textarea('saveanswer','Insert new answer here',['class'=>'form-control textarea','rows'=>'1'])}}
+{{Form::hidden('question_id',$question->id)}}
 
-            console.log('ok');
+<br>
+{{Form::submit('Submit',['class'=>'btn  btn-default'])}}                      
+{{ Form::close() }}
 
-        });
-    });
-</script>
-
+<h2><a href="/{{$quizname}}">Return to {{$quizname}}</a></h2>
 @endsection

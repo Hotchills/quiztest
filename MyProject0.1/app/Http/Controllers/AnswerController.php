@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use App\Question;
+use App\Quiz;
 use Illuminate\Http\Request;
 
-class AnswerController extends Controller
-{
+class AnswerController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($question)
-    {
+    public function index($question) {
         //
-        $question=Question::where('id',$question)->first();
-        
-       return view('AddAnswersToQuestion', compact('question'));
+        $question = Question::where('id', $question)->first();
+$quizname  = Quiz::find($question->quiz_id)->name;
+        return view('AddAnswersToQuestion', compact('question','quizname'));
     }
 
     /**
@@ -26,8 +26,7 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -37,17 +36,18 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-     
+    public function store(Request $request) {
+
         //Create new answer , keywords.    
+        $question = Question::find($request->question_id);
+
         $answer = new Answer();
-        $answer->body = $request->answer;
+        $answer->body = $request->saveanswer;
         $answer->aux = 0;
         $answer->question_id = $question->id;
         $answer->question()->associate($question); // associate the answer to the question
         $answer->save(); // save answer in DB
-        
+
         return redirect()->back()->with('message', 'Answer added');
     }
 
@@ -57,8 +57,7 @@ class AnswerController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function show(Answer $answer)
-    {
+    public function show(Answer $answer) {
         //
     }
 
@@ -68,8 +67,7 @@ class AnswerController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Answer $answer)
-    {
+    public function edit(Answer $answer) {
         //
     }
 
@@ -80,8 +78,7 @@ class AnswerController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
-    {
+    public function update(Request $request, Answer $answer) {
         //
     }
 
@@ -91,8 +88,16 @@ class AnswerController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Answer $answer)
-    {
-        //
+    public function destroy($id) {
+        $answer = Answer::where('id', $id)->first();
+
+        $question = Question::where('id', $answer->question_id)->first();
+        $question->question_nr = 0;
+        $question->save();
+
+        Answer::destroy($id);
+
+        return redirect()->back()->with('message', 'Answer del');
     }
+
 }

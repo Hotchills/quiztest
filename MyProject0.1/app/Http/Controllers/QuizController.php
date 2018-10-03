@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Quiz;
 use App\Question;
+use App\User;
+use App\Answer;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller {
@@ -23,6 +25,19 @@ class QuizController extends Controller {
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
             return view('quiz', compact('quiz', 'questions'));
+        }
+        abort(404);
+    }
+
+    public function Checkquizresult($main, $user) {
+        //
+        if ($quiz = Quiz::where('name', $main)->first() && $user = User::find(1)) {
+            
+             $quiz = Quiz::where('name', $main)->first();
+            $questions = Question::where('quiz_id', $quiz->id)->get();
+
+
+            return view('CheckQuizResult', compact('quiz', 'questions'));
         }
         abort(404);
     }
@@ -55,7 +70,7 @@ class QuizController extends Controller {
         $quiz->body = $request->body;
         $quiz->save();
 
-        return redirect()->back()->with('message', 'Quiz added');
+        return redirect()->to('/'.$quiz->name)->with('message', 'Quiz added');
     }
 
 }

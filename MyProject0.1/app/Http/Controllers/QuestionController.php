@@ -16,7 +16,8 @@ class QuestionController extends Controller {
      */
     public function index($main) {
         $quiztempid = Quiz::where('name', $main)->first()->id;
-        return view('/CreateQuestion', compact('quiztempid'));
+        $quizname = Quiz::where('name', $main)->first()->name;
+        return view('/CreateQuestion', compact('quiztempid','quizname'));
     }
 
     /**
@@ -83,6 +84,8 @@ class QuestionController extends Controller {
      */
     public function edit(Question $question) {
         //
+        
+        
     }
 
     /**
@@ -92,7 +95,12 @@ class QuestionController extends Controller {
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question) {
+    public function update($id , Request $request) {
+        
+        $question = Question::where('id', $id)->first();
+        $question->question_nr=$request->answerid;
+        $question->save();
+        return redirect()->back()->with('message', 'Correct answer added');
         //
     }
 

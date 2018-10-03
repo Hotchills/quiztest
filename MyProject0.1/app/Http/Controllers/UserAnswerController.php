@@ -80,8 +80,50 @@ class UserAnswerController extends Controller {
      * @param  \App\UserAnswer  $userAnswer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserAnswer $userAnswer) {
+    public function update(Request $request, $id) {
         //
+        //       $answer = $request->get('answers');
+        $temp = 0;
+        if ($tempUsers = UserAnswer::where('user_id', 1)->where('question_id', $id)->get()) {
+            foreach ($tempUsers as $tempuser) {
+                //    UserAnswer::destroy($tempuser->id);
+                $tempuser->body = 0;
+                $tempuser->save();
+                $temp++;
+            }
+        }
+        if($request->has('answers')){
+        foreach ($request->input('answers') as $value) {
+            if ($temp > 0) {
+                $tempUsers = UserAnswer::where('user_id', 1)->where('question_id', $id)->get();
+               $temp--; 
+                    $tempUsers[$temp]->body = $value;
+                    $tempUsers[$temp]->save();
+                                 
+            }else{
+            $tempUser = new UserAnswer;
+            $tempUser->body = $value;
+            $tempUser->question_id = $id;
+            $tempUser->user_id = 1;
+            $tempUser->save();
+            $user = User::find(1);
+            $question = Question::find($id);
+            $tempUser->user()->associate($user);
+            $tempUser->question()->associate($question);
+            }
+        }
+        }else{
+        if ($tempUsers = UserAnswer::where('user_id', 1)->where('question_id', $id)->get()) {
+            foreach ($tempUsers as $tempuser) {
+                //    UserAnswer::destroy($tempuser->id);
+                $tempuser->body = 0; 
+                $tempuser->save();
+            }
+        }
+            
+            
+        }
+        return redirect()->back()->with('message', 'Saved');
     }
 
     /**

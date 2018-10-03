@@ -28,7 +28,7 @@
 
 {{ Form::close() }}
 
-<script>
 
-</script>
+<h2><a href="/{{$quizname}}">Return to {{$quizname}}</a></h2>
+
 @endsection
