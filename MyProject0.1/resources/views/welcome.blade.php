@@ -3,6 +3,28 @@
   <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale = 1">
     <title>Godaddy DCOps</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Godaddy DCOps') }}</title>
+
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <!-- Fonts -->
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
     <style>
     body{
     background: #02C54C;
@@ -16,6 +38,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  
 
 }
 
@@ -27,12 +50,16 @@
   height: 100%;
   border-radius: 10px;
   transform-style: preserve-3d;
-  transition: all 0.8s ease;
+  transition: all 600ms ease;
+
+
 }
 
 .thecard:hover{
   transform: rotateY(180deg);
 }
+
+
 
  .thefront{
   position: absolute;
@@ -74,18 +101,18 @@
 
         <div class="theback">               
 
-        	 <div class="card center_login">
-                    <div Style="text-align:center" class="card-header">{{ __('Godaddy Quizz') }}</div>
+             <div class="card center_login">
+                    <div Style="text-align:center" class="card-header">{{ __('Godaddy Hiring Questionary') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                             @csrf
 
-                            <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Login') }}</label>
+                            <div class="center">
+                              <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Login') }}</label> 
 
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="Name" value="{{ old('email') }}" required autofocus>
+                                <div class="center">
+                                   <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="Name" value="{{ old('email') }}" required autofocus>
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -95,11 +122,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <div class="center">
+                                <label for="password">{{ __('Password') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                               <div class="center">
+                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
@@ -109,8 +136,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-0 center_login">
-                                <div class="col-md-8 offset-md-4">
+                            <div class="Center">
+                               
                                     <button type="submit" class="btn btn-outline-success">
                                         {{ __('Connect') }}
                                     </button>
@@ -119,8 +146,8 @@
                         </form>
                     </div>
                 </div>
-            	        
-			</div>
+                        
+            </div>
       </div>
     </div>
 
