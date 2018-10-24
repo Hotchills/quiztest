@@ -5,69 +5,61 @@
 
 <div class="quiz-box card">
     <div class="card-header">
-        <h1>Quiz ID: <strong>{{$quiz->id}} &nbsp </strong>Quiz Name: <strong> {{$quiz->name}}</strong></h1>
+        <h1>Name: <strong> {{$quiz->name}}</strong></h1>
         <h1>{{$quiz->title}}</h1>
+        <p>Debug info quizID: <strong>{{$quiz->id}}</strong></p> 
     </div>
+
     <ul class="card-body" Style="list-style: none;">
+        <div class="row">       
+            <div class=" col">          
+                <a href="{{$quiz->QuestionPaginate()->previousPageUrl()}}" class="btn btn-success "> <strong>< </strong>Previous Question </a>
+            </div>
+            <div class=" col text-right"> 
+                <a href="{{$quiz->QuestionPaginate()->nextPageUrl()}}" class="btn btn-success">Next Question <strong>></strong></a>
+            </div>
+        </div>
         @foreach($quiz->QuestionPaginate() as $question)
         <div class="question-box">
 
-            <li><h3><span class="badge badge-success">{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}}</strong></h3>
-                @if(0)
-                <hr>
-                {{Form::open(['route'=>'useranswer.store','method'=>'POST'])}}
-                {{Form::textarea('useranswer','Insert answer',['class'=>'form-control textarea','rows'=>'4'])}}
-                {{Form::hidden('question_id',$question->id)}}
-                {{Form::hidden('user_id',1)}}
-                <br>
-                {{Form::submit('Submit',['class'=>'btn  question-answer-button'])}}                      
-                {{ Form::close() }}
+            <li><h3><span class="badge badge-success" id="">{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}}</strong></h3>
+
             </li>
-            @endif    
             <br>
 
-            {{ Form::open(['route' => ['useranswer.update', $question->id], 'method' => 'put']) }}
-
-            <ul>
+            <ul class="list-group row" >
                 @foreach($question->Answers() as $answer)
 
-                <li class="row">
-                    <div  class="col-sm-1 col-md-1 btn-sm">
+                @if($question->UserAnswers($answer->id))
+                <li class="list-group-item list-group-item-success" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}}</li>
 
-                    </div>
+                @else   
+                <li class="list-group-item" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}}</li>
 
-                    <div class="col-sm-7 col-md-7 "> <h3>
-                        @if($question->UserAnswers($answer->id))
-                        {{ Form::checkbox('answers[]',$answer->id,'yes') }}
-                        {{ Form::label('answers', $answer->body) }}
-                        @else
-                        {{ Form::checkbox('answers[]',$answer->id) }}
-                        {{ Form::label('answers', $answer->body) }}                      
-                        @endif   
-                        
-                        </h3>
-                    </div>
-
-                </li>
-
+                @endif  
                 @endforeach
+
+                <br>
 
             </ul>
 
-            {{Form::submit('Save',['class'=>'btn  question-answer-button'])}}
-            {{ Form::close() }}
-
         </div>
+
         @endforeach
         <div class="container col-sm-4">
             {{ $quiz->QuestionPaginate()->links() }}
+
+
         </div>
     </ul>
-    <div class=" col-sm-4">
-        <button type="button" class="btn btn-success" value="Input Button" onclick="makenewquestion()"> Add question to quiz </button>
+
+    <div class=" col-sm-4">        
+        <p><a href="/{{$quiz->name}}/CreateQuestion">Add question</a></p>
     </div>
-    
-    <h3><a href="/{{$quiz->name}}/1">Check results</a></h3>
+    <div class=" col-sm-4">
+        <p><a href="/{{$quiz->name}}/1">Check results</a></p>
+    </div>
+
     <br>
 </div>
 
@@ -75,7 +67,48 @@
 <script>
     function makenewquestion() {
 
-        location.href = "{{route('CreateQuestion',['main' => $quiz->name ])}}";
+     window.location='/'+{{$quiz->name}}+'/CreateQuestion';
+    }
+
+    $(document).ready(function () {
+
+        $('.list-group-item').click(function () {
+            var element = document.getElementById($(this).attr('id'));
+            var ansid = Number($(this).attr('id').slice(6));
+            var qid = $(this).attr('data-qid');
+            // console.log(qid);   
+
+            addanswer(ansid, qid);
+
+        });
+
+    });
+
+    function addanswer(temp, temp2) {
+
+        // document.getElementById('up_vote_comment' + temp).innerHTML = vote + 1;
+
+        var useranswerid = temp;
+        var questionid = temp2;
+        $.ajax({
+            method: "POST",
+            url: 'http://127.0.0.1:8000/addajaxanswer',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {useranswerid: useranswerid, questionid: questionid}
+        })
+                .done(function (data) {
+                    //    console.log('merge');
+                    var element = document.getElementById('answer' + useranswerid);
+                    element.classList.remove('list-group-item-success');
+                    console.log(data['useranswer']);
+
+                    if (data['useranswer'] != 0) {
+                        element.classList.add('list-group-item-success');
+                        console.log('merge');
+                    }
+                });
     }
 </script>
 

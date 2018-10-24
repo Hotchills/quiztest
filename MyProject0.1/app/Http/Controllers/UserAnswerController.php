@@ -92,38 +92,69 @@ class UserAnswerController extends Controller {
                 $temp++;
             }
         }
-        if($request->has('answers')){
-        foreach ($request->input('answers') as $value) {
-            if ($temp > 0) {
-                $tempUsers = UserAnswer::where('user_id', 1)->where('question_id', $id)->get();
-               $temp--; 
+        if ($request->has('answers')) {
+            foreach ($request->input('answers') as $value) {
+                if ($temp > 0) {
+                    $tempUsers = UserAnswer::where('user_id', 1)->where('question_id', $id)->get();
+                    $temp--;
                     $tempUsers[$temp]->body = $value;
                     $tempUsers[$temp]->save();
-                                 
-            }else{
+                } else {
+                    $tempUser = new UserAnswer;
+                    $tempUser->body = $value;
+                    $tempUser->question_id = $id;
+                    $tempUser->user_id = 1;
+                    $tempUser->save();
+                    $user = User::find(1);
+                    $question = Question::find($id);
+                    $tempUser->user()->associate($user);
+                    $tempUser->question()->associate($question);
+                }
+            }
+        } else {
+            if ($tempUsers = UserAnswer::where('user_id', 1)->where('question_id', $id)->get()) {
+                foreach ($tempUsers as $tempuser) {
+                    //    UserAnswer::destroy($tempuser->id);
+                    $tempuser->body = 0;
+                    $tempuser->save();
+                }
+            }
+        }
+        return redirect()->back()->with('message', 'Saved');
+    }
+
+    public function addajaxanswer(Request $request) {
+
+        $useranswerid = $request->useranswerid;
+        $questionid = $request->questionid;
+        //$user = Auth::user();
+        if ($tempUser = UserAnswer::where('user_id', 1)->where('question_id', $questionid)->where('body', $useranswerid)->first()) {
+
+            $tempUser->body = 0;
+            $tempUser->save();
+            
+        } elseif ($tempUser = UserAnswer::where('user_id', 1)->where('question_id', $questionid)->where('body', 0)->first()) {
+
+            $tempUser->body = $useranswerid;
+            $tempUser->save();
+            
+        } else {
+
             $tempUser = new UserAnswer;
-            $tempUser->body = $value;
-            $tempUser->question_id = $id;
+            $tempUser->body = $useranswerid;
+            $tempUser->question_id = $questionid;
             $tempUser->user_id = 1;
             $tempUser->save();
             $user = User::find(1);
-            $question = Question::find($id);
+            $question = Question::find($questionid);
             $tempUser->user()->associate($user);
             $tempUser->question()->associate($question);
-            }
         }
-        }else{
-        if ($tempUsers = UserAnswer::where('user_id', 1)->where('question_id', $id)->get()) {
-            foreach ($tempUsers as $tempuser) {
-                //    UserAnswer::destroy($tempuser->id);
-                $tempuser->body = 0; 
-                $tempuser->save();
-            }
-        }
-            
-            
-        }
-        return redirect()->back()->with('message', 'Saved');
+
+
+
+        //    return response()->json(['status' => 'success'], 201);
+        return response()->json(['useranswer' => $tempUser->body, 'questionid' => $questionid]);
     }
 
     /**

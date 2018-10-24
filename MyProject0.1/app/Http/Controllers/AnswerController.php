@@ -17,8 +17,8 @@ class AnswerController extends Controller {
     public function index($question) {
         //
         $question = Question::where('id', $question)->first();
-$quizname  = Quiz::find($question->quiz_id)->name;
-        return view('AddAnswersToQuestion', compact('question','quizname'));
+        $quizname = Quiz::find($question->quiz_id)->name;
+        return view('AddAnswersToQuestion', compact('question', 'quizname'));
     }
 
     /**

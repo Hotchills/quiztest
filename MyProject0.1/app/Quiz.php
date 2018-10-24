@@ -3,6 +3,7 @@
 namespace App;
 use App\Question;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Quiz extends Model
 {
@@ -18,7 +19,10 @@ public function question() {
 public function QuestionPaginate(){
 
   $questions=Question::where("quiz_id",$this->id)->paginate(1);
-
+        //  ->orWhere("id",1)
+        //  ->orderBy('id', 'desc')
+           
+  
   return $questions;
 }
 

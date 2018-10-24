@@ -44,7 +44,7 @@ class Question extends Model {
         public function UserAnswers2() {
         
         $answers = UserAnswer::where("question_id", $this->id)->where('user_id',1)->get();
-
+        
         return $answers;
     }
 
