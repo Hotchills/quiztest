@@ -112,8 +112,9 @@
                         element.classList.add('list-group-item-success');
                         console.log('merge');
                     }
-                }).fail(function(data){
-                    alert("Try again champ!");
+                }).fail(function($xhr){
+                      var data = $xhr.responseJSON;
+                    console.log(data);
                     });
             }
 </script>
