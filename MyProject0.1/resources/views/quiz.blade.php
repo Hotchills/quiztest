@@ -112,8 +112,10 @@
                         element.classList.add('list-group-item-success');
                         console.log('merge');
                     }
-                });
-    }
+                }).fail(function(data){
+                    alert("Try again champ!");
+                    });
+            }
 </script>
 
 @endsection

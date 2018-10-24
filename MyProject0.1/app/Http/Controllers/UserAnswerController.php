@@ -151,8 +151,6 @@ class UserAnswerController extends Controller {
             $tempUser->question()->associate($question);
         }
 
-
-
         //    return response()->json(['status' => 'success'], 201);
         return response()->json(['useranswer' => $tempUser->body, 'questionid' => $questionid]);
     }
