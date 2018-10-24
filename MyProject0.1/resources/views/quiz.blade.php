@@ -90,9 +90,10 @@
 
         var useranswerid = temp;
         var questionid = temp2;
+        console.log(window.location.host);
         $.ajax({
             method: "POST",
-            url: 'http://92.42.111.150:8000/addajaxanswer',
+            url: 'http://92.42.111.150/addajaxanswer',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
