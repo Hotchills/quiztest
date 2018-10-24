@@ -26,7 +26,7 @@ Route::post('/AddAnswersToQuestion', ['uses'=> 'AnswerController@store','as'=>'a
 Route::post('/CreateQuestion', ['uses'=> 'QuestionController@store','as'=>'question.store' ]);
 Route::post('/AddUserAnswer', ['uses'=> 'UserAnswerController@store','as'=>'useranswer.store' ]);
 //Route::post('/AddAnswer', ['uses'=> 'AnswerController@store','as'=>'answer.store' ]);
-Route::post('/addajaxanswer' , 'UseranswerController@addajaxanswer');
+Route::post('/addajaxanswer' , 'UserAnswerController@addajaxanswer');
 
 
 Auth::routes();
