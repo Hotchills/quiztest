@@ -96,7 +96,7 @@
         
         $.ajax({
             method: "POST",
-            url: 'http://92.42.111.150/addajaxanswer',
+            url: '/addajaxanswer',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
