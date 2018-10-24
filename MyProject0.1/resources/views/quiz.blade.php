@@ -91,11 +91,12 @@
         var useranswerid = temp;
         var questionid = temp2;
         console.log(window.location.host);
+        
         console.log(window.location.href);
         
         $.ajax({
             method: "POST",
-            url: '92.42.111.150/addajaxanswer',
+            url: 'http://92.42.111.150/addajaxanswer',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
