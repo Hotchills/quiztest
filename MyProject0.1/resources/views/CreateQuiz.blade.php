@@ -8,7 +8,7 @@
 <h2>Add new quiz</h2>
 
 {{Form::open(['route'=>'quiz.store','method'=>'POST'])}}
-{{Form::label('name','Name:')}}
+{{Form::label('name','No empty spaces for URL:')}}
 {{Form::text('name','',['class'=>'form-control'])}}
 
 {{Form::label('title','Title:')}}

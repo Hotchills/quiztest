@@ -28,6 +28,14 @@ class QuizController extends Controller {
         }
         abort(404);
     }
+        public function geteditquiz($main) {
+        //
+        if ($quiz = Quiz::where('name', $main)->first()) {
+            $questions = $quiz->question;
+            return view('QuizEdit', compact('quiz', 'questions'));
+        }
+        abort(404);
+    }
 
     public function Checkquizresult($main, $user) {
         //
@@ -71,6 +79,14 @@ class QuizController extends Controller {
         $quiz->save();
 
         return redirect()->to('/'.$quiz->name)->with('message', 'Quiz added');
+    }
+        public function destroy($id) {
+
+       
+      
+        Quiz::destroy($id);
+
+        return redirect()->back()->with('message', 'Quiz has been deleted');
     }
 
 }

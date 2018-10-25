@@ -38,6 +38,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
 Route::get('/{main}/CreateQuestion', 'QuestionController@index')->name('CreateQuestion');
 Route::get('/{main}','QuizController@startquiz');
+Route::get('/edit/{main}','QuizController@geteditquiz');
 Route::get('/{main}/{user}','QuizController@Checkquizresult')->name('Checkquizresult');
 
 
@@ -53,3 +54,5 @@ Route::put('/AddCorrectAnswersToQuestion/{id}', 'QuestionController@update')->na
 Route::put('/Useranswer/{id}', 'UserAnswerController@update')->name('useranswer.update');
 
 Route::delete('/AddAnswersToQuestion/{id}', 'AnswerController@destroy')->name('delanswer.delete');
+Route::delete('/delquestion/{id}', 'QuestionController@destroy')->name('delquestion.delete');
+Route::delete('/delquiz/{id}', 'QuizController@destroy')->name('delquiz.delete');

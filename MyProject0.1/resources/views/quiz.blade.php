@@ -44,12 +44,13 @@
             </ul>
 
         </div>
-
+            {{ Form::open(['method' => 'DELETE', 'route' => ['delquestion.delete', $question->id]]) }}
+            {{Form::submit('Delete question',['class'=>'btn btn-danger '])}} 
+            {{ Form::close() }}
         @endforeach
         <div class="container col-sm-4">
             {{ $quiz->QuestionPaginate()->links() }}
-
-
+            
         </div>
     </ul>
 
@@ -59,6 +60,7 @@
     <div class=" col-sm-4">
         <p><a href="/{{$quiz->name}}/1">Check results</a></p>
     </div>
+
 
     <br>
 </div>

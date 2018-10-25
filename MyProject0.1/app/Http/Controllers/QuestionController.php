@@ -17,7 +17,7 @@ class QuestionController extends Controller {
     public function index($main) {
         $quiztempid = Quiz::where('name', $main)->first()->id;
         $quizname = Quiz::where('name', $main)->first()->name;
-        return view('/CreateQuestion', compact('quiztempid','quizname'));
+        return view('/CreateQuestion', compact('quiztempid', 'quizname'));
     }
 
     /**
@@ -53,17 +53,8 @@ class QuestionController extends Controller {
         $question->duplicate = 0;
         $question->quiz()->associate($quiz); // associate the question to the quiz
         $question->save(); // save quiestion in DB
-//Create new answer , keywords.    
-    //    $answer = new Answer();
-    //    $answer->body = $request->answer;
-     //   $answer->aux = 0;
-     //   $answer->question_id = $question->id;
-     //   $answer->question()->associate($question); // associate the answer to the question
-     //   $answer->save(); // save answer in DB
-
-
-    //    return redirect()->back()->with('message', 'Question added');
-          return redirect(route('addanswerstoquestion', ['question' => $question->id]));
+  
+        return redirect(route('addanswerstoquestion', ['question' => $question->id]));
     }
 
     /**
@@ -84,8 +75,6 @@ class QuestionController extends Controller {
      */
     public function edit(Question $question) {
         //
-        
-        
     }
 
     /**
@@ -95,10 +84,10 @@ class QuestionController extends Controller {
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update($id , Request $request) {
-        
+    public function update($id, Request $request) {
+
         $question = Question::where('id', $id)->first();
-        $question->question_nr=$request->answerid;
+        $question->question_nr = $request->answerid;
         $question->save();
         return redirect()->back()->with('message', 'Correct answer added');
         //
@@ -110,8 +99,13 @@ class QuestionController extends Controller {
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question) {
-        //
+    public function destroy($id) {
+
+     
+      
+        Question::destroy($id);
+
+        return redirect()->back()->with('message', 'Question has been deleted');
     }
 
 }

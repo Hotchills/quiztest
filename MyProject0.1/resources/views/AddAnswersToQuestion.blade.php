@@ -59,7 +59,7 @@
 {{Form::hidden('question_id',$question->id)}}
 
 <br>
-{{Form::submit('Add question',['class'=>'btn  btn-default'])}}                      
+{{Form::submit('Add answer',['class'=>'btn  btn-default'])}}                      
 {{ Form::close() }}
 <br>
 
