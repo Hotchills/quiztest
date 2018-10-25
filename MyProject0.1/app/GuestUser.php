@@ -2,29 +2,43 @@
 
 namespace App;
 
-//use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use App\AssignedQuiz;
 
-class GuestUser extends Authenticatable
-{
-       use Notifiable;
+
+class GuestUser extends Model {
 // The authentication guard for admin
-    protected $guard = 'GuestUser';
-     /**
-      * The attributes that are mass assignable.
-      *
-      * @var array
-      */
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public $table = 'guest_users';
     protected $fillable = [
-        'email', 'password','code','userinfo1','userinfo2','userinfo3',
+        'email', 'password', 'code', 'userinfo1', 'userinfo2', 'userinfo3',
     ];
-     /**
-      * The attributes that should be hidden for arrays.
-      *
-      * @var array
-      */
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function assignedquiz() {
+        return $this->hasMany('App\AssignedQuiz');
+    }
+    
+    public function assignedq() {
+        
+        $assignedq = AssignedQuiz::where('guestuser_id',$this->id)->get();
+        
+        return $assignedq;
+    }
+    
+    
+
 }

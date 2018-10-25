@@ -28,7 +28,8 @@ class QuizController extends Controller {
         }
         abort(404);
     }
-        public function geteditquiz($main) {
+
+    public function geteditquiz($main) {
         //
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
@@ -40,8 +41,8 @@ class QuizController extends Controller {
     public function Checkquizresult($main, $user) {
         //
         if ($quiz = Quiz::where('name', $main)->first() && $user = User::find(1)) {
-            
-             $quiz = Quiz::where('name', $main)->first();
+
+            $quiz = Quiz::where('name', $main)->first();
             $questions = Question::where('quiz_id', $quiz->id)->get();
 
 
@@ -78,12 +79,13 @@ class QuizController extends Controller {
         $quiz->body = $request->body;
         $quiz->save();
 
-        return redirect()->to('/'.$quiz->name)->with('message', 'Quiz added');
+        return redirect()->to('/' . $quiz->name)->with('message', 'Quiz added');
     }
-        public function destroy($id) {
 
-       
-      
+    public function destroy($id) {
+
+
+
         Quiz::destroy($id);
 
         return redirect()->back()->with('message', 'Quiz has been deleted');

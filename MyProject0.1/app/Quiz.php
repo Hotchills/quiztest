@@ -15,6 +15,9 @@ protected $fillable = [
 public function question() {
     return $this->hasMany('App\Question','quiz_id','id');
 }
+public function assignedquiz() {
+    return $this->hasMany('App\AssignedQuiz','assigned_id','id');
+}
 
 public function QuestionPaginate(){
 

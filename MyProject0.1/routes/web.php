@@ -21,13 +21,18 @@ Route::get('/admin', function () {
     return view('admin');
 });
 
+
+Route::post('/AssignedQuiz', ['uses'=> 'AssignedQuizController@store','as'=>'assignedquiz.store' ]);
+
+
 Route::post('/CreateQuiz', ['uses'=> 'QuizController@store','as'=>'quiz.store' ]);
+Route::post('/CreateGuestUser', ['uses'=> 'GuestUserController@store','as'=>'guestuser.store' ]);
 Route::post('/AddAnswersToQuestion', ['uses'=> 'AnswerController@store','as'=>'addanswers.store' ]);
 Route::post('/CreateQuestion', ['uses'=> 'QuestionController@store','as'=>'question.store' ]);
 Route::post('/AddUserAnswer', ['uses'=> 'UserAnswerController@store','as'=>'useranswer.store' ]);
 //Route::post('/AddAnswer', ['uses'=> 'AnswerController@store','as'=>'answer.store' ]);
 Route::post('/addajaxanswer' , 'UserAnswerController@addajaxanswer');
-
+Route::post('/LoginUser', ['uses'=> 'AssignedQuizController@show','as'=>'loginguestuser.show' ]);
 
 Auth::routes();
 
@@ -35,7 +40,10 @@ Auth::routes();
 Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('addanswerstoquestion');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/LoginUser', 'AssignedQuizController@index')->name('LoginUser');
 Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
+Route::get('/CreateGuestUser', 'GuestUserController@index')->name('CreateGuestUser');
+Route::get('/ListUser', 'GuestUserController@showusers')->name('ListGuestUser');
 Route::get('/{main}/CreateQuestion', 'QuestionController@index')->name('CreateQuestion');
 Route::get('/{main}','QuizController@startquiz');
 Route::get('/edit/{main}','QuizController@geteditquiz');
@@ -43,12 +51,6 @@ Route::get('/{main}/{user}','QuizController@Checkquizresult')->name('Checkquizre
 
 
 Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('addanswerstoquestion');
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
-Route::get('/{main}/CreateQuestion', 'QuestionController@index')->name('CreateQuestion');
-Route::get('/{main}','QuizController@startquiz');
-
 
 Route::put('/AddCorrectAnswersToQuestion/{id}', 'QuestionController@update')->name('correctanswer.update');
 Route::put('/Useranswer/{id}', 'UserAnswerController@update')->name('useranswer.update');
