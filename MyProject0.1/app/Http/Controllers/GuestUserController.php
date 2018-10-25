@@ -32,7 +32,7 @@ class GuestUserController extends Controller {
 
         $GuestUser = new GuestUser();
         $GuestUser->email = $request->email;
-        $GuestUser->password = $request->password;
+        $GuestUser->password =0;
         $GuestUser->code = 0;
         $GuestUser->info1 = 0;
         $GuestUser->info2 = 0;

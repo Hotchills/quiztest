@@ -8,22 +8,20 @@
 <ul class="list-group row" >
     @foreach($guestusers as $guestuser)
 
-    <li class="list-group-item"><h3>{{$guestuser->id}}. {{$guestuser->email}} </h3></li>
-  
-    <p>Is assigned to : </p>
+    <li class="list-group-item"><h3>{{$guestuser->id}}. {{$guestuser->email}}  is assigned to the following tests : </h3>
     @foreach($guestuser->assignedq() as $assigned)
    
-    {{ $assigned->quiz_id }} : {{ $assigned->code }}
+   <p> ID of quiz : {{ $assigned->quiz_id }} /  Code to start: {{ $assigned->code }}</p>
     
     @endforeach
 
     {{Form::open(['route'=>'assignedquiz.store','method'=>'POST'])}}
     {{Form::number('QuizID', 'value')}}
-    {{ Form::hidden('guestuserid', $guestuser->id) }}
-    {{Form::submit('Add quiz',['class'=>'btn btn-primary'])}}
-    {{ Form::close() }}
+    {{Form::hidden('guestuserid', $guestuser->id) }}
+    {{Form::submit('Add quiz to this user',['class'=>'btn btn-primary'])}}
+    {{Form::close() }}
     @endforeach
-
+</li>
     <br>
 
 </ul>
