@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+<div class="container" Style="width:400px;">
 
 {{Form::open(['route'=>'loginguestuser.show','method'=>'POST'])}}
 
@@ -11,10 +11,10 @@
 
 
 
-{{Form::submit('Start Test',['class'=>'btn btn-primary'])}}
+{{Form::submit('Start Test',['class'=>'btn btn-success'])}}
 
 {{ Form::close() }}
 
 
-
+</div>
 @endsection
