@@ -93,14 +93,14 @@
         console.log(window.location.host);
         
         console.log(window.location.href);
-        
+        var _token = $("input[name='_token']").val();
         $.ajax({
             method: "POST",
             url: '/addajaxanswer',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            data: {useranswerid: useranswerid, questionid: questionid}
+            data: { _token:_token , useranswerid: useranswerid, questionid: questionid}
         })
                 .done(function (data) {
                     //    console.log('merge');
