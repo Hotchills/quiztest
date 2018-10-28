@@ -28,8 +28,7 @@
                 @foreach($question->Answers() as $answer)
 
                 @if($question->UserAnswers($answer->id))
-                <li class="list-group-item list-group-item-success" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}}</li>
-
+                
                 @else   
                 <li class="list-group-item" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}}</li>
 

@@ -137,7 +137,7 @@ class UserAnswerController extends Controller {
             
         $userid = $useridtemp->guestuser_id;
         // return response()->json(['status' => $userid], 201);
-        //$user = Auth::user();
+   
         if ($tempUser = UserAnswer::where('user_id', $userid)->where('question_id', $questionid)->where('body', $answerid)->first()) {
 
             $tempUser->body = 0;
@@ -149,7 +149,7 @@ class UserAnswerController extends Controller {
             $tempUser->save();
             
         } else {
- 
+            
             $tempUser = new UserAnswer;
             $tempUser->body = $answerid;
             $tempUser->question_id = $questionid;
@@ -159,11 +159,7 @@ class UserAnswerController extends Controller {
             $tempUser->save();
             $tempUser->guestuser()->associate($user);
             $tempUser->question()->associate($question);
-            
-            
-            
-           
-
+ 
         }
          return response()->json(['answer' => $tempUser->body, 'questionid' => $questionid,'userid'=>$userid]);
 
