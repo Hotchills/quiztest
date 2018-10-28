@@ -34,7 +34,7 @@ class Question extends Model {
 
     public function UserAnswers($temp) {
         
-       if( $answer = UserAnswer::where('question_id', $this->id)->where('user_id',1)->where('body',$temp)->first())
+       if( $answer = UserAnswer::where('question_id', $this->id)->where('user_id',user_id)->where('body',$temp)->first())
                if($answer->body != 0)
         return true;
        
