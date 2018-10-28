@@ -4,6 +4,7 @@ namespace App;
 
 use App\Answer;
 use App\UserAnswer;
+use App\AssignedQuiz;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model {
@@ -32,19 +33,21 @@ class Question extends Model {
         return $answers;
     }
 
-    public function UserAnswers($temp) {
-        
-       if( $answer = UserAnswer::where('question_id', $this->id)->where('user_id',user_id)->where('body',$temp)->first())
-               if($answer->body != 0)
-        return true;
-       
-       else
-           return false;
+    public function UserAnswers($temp, $code) {
+
+        if ($userid = AssignedQuiz::where('code', $code)->first())
+            if ($answer = UserAnswer::where('question_id', $this->id)->where('user_id', $userid->guestuser_id)->where('body', $temp)->first())
+                if ($answer->body != 0)
+                    return true;
+                
+                
+                    return false;
     }
-        public function UserAnswers2() {
-        
-        $answers = UserAnswer::where("question_id", $this->id)->where('user_id',1)->get();
-        
+
+    public function UserAnswers2() {
+
+        $answers = UserAnswer::where("question_id", $this->id)->where('user_id', 1)->get();
+
         return $answers;
     }
 
