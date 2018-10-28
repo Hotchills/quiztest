@@ -36,7 +36,7 @@ Auth::routes();
 
 
 Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('addanswerstoquestion');
-
+Route::get('/edit/{main}','QuizController@geteditquiz');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/LoginUser', 'AssignedQuizController@index')->name('LoginUser');
 Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
@@ -45,7 +45,7 @@ Route::get('/ListUser', 'GuestUserController@showusers')->name('ListGuestUser');
 Route::get('/{main}/CreateQuestion', 'QuestionController@index')->name('CreateQuestion');
 Route::get('/{code}/{main}','QuizController@startquiz');
 Route::get('/{main}','QuizController@geteditquiz');
-Route::get('/edit/{main}','QuizController@geteditquiz');
+
 Route::get('grade/{main}/{user}','QuizController@Checkquizresult')->name('Checkquizresult');
 
 
