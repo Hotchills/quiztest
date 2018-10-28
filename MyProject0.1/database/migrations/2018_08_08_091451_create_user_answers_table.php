@@ -23,7 +23,7 @@ class CreateUserAnswersTable extends Migration
         Schema::table('user_answers', function (Blueprint $table)
         {
   $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+  $table->foreign('user_id')->references('id')->on('guest_users')->onDelete('cascade');
 });
 
 

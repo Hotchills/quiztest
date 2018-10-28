@@ -24,9 +24,9 @@ class GuestUser extends Model {
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+ //   protected $hidden = [
+ //       'password', 'remember_token',
+ //   ];
 
     public function assignedquiz() {
         return $this->hasMany('App\AssignedQuiz');
@@ -34,9 +34,12 @@ class GuestUser extends Model {
     
     public function assignedq() {
         
-        $assignedq = AssignedQuiz::where('guestuser_id',$this->id)->get();
-        
+        $assignedq = AssignedQuiz::where('guestuser_id',$this->id)->get();      
         return $assignedq;
+    }
+    
+    public function useranswer() {
+      return $this->hasMany('App\UserAnswer','user_id','id');
     }
     
     

@@ -8,20 +8,48 @@
 <ul class="list-group row" >
     @foreach($guestusers as $guestuser)
 
-    <li class="list-group-item"><h3>{{$guestuser->id}}. {{$guestuser->email}}  is assigned to the following tests : </h3>
-    @foreach($guestuser->assignedq() as $assigned)
-   
-   <p> ID of quiz : {{ $assigned->quiz_id }} /  Code to start: {{ $assigned->code }}</p>
-    
+    <li class="list-group-item"><h3>{{$guestuser->id}}. {{$guestuser->email}} </h3>
+
+        <p>Is assigned to : </p>
+        @foreach($guestuser->assignedq() as $assigned)
+        <ul>
+            
+       
+      <li><strong> ID:</strong>{{ $assigned->quiz_id }}<strong> CODE: </strong>{{ $assigned->code }}</li>
+ </ul>
+        @endforeach
+
+        <div class="row">
+            
+
+
+                <form action='/AssignedQuiz' method="POST" class="form-horizontal">
+                    {{ csrf_field() }}
+
+
+                    <select class="form-control" name="QuizID">
+
+                        <option>Select quiz</option>
+
+                        @foreach($quizzes as $quiz)
+                        <option value="{{ $quiz->id }}" > {{ $quiz->name }} </option>
+                        @endforeach    
+                    </select>
+
+                    <input type="hidden" id="guestuserid" name="guestuserid" value="{{$guestuser->id}}">
+                   
+                    
+                        <button type="submit" class="btn btn-default">
+                            Assign
+                        </button>
+                   
+                </form>
+            </div>
+
+    </li>
+    <br>
     @endforeach
 
-    {{Form::open(['route'=>'assignedquiz.store','method'=>'POST'])}}
-    {{Form::number('QuizID', 'value')}}
-    {{Form::hidden('guestuserid', $guestuser->id) }}
-    {{Form::submit('Add quiz to this user',['class'=>'btn btn-primary'])}}
-    {{Form::close() }}
-    @endforeach
-</li>
     <br>
 
 </ul>

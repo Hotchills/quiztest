@@ -21,12 +21,9 @@
         </div>
         @foreach($quiz->QuestionPaginate() as $question)
         <div class="question-box">
-
             <li><h3><span class="badge badge-success" id="">{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}}</strong></h3>
-
             </li>
             <br>
-
             <ul class="list-group row" >
                 @foreach($question->Answers() as $answer)
 
@@ -44,21 +41,24 @@
             </ul>
 
         </div>
-            {{ Form::open(['method' => 'DELETE', 'route' => ['delquestion.delete', $question->id]]) }}
-            {{Form::submit('Delete question',['class'=>'btn btn-danger '])}} 
-            {{ Form::close() }}
+        {{ Form::open(['method' => 'DELETE', 'route' => ['delquestion.delete', $question->id]]) }}
+        {{Form::submit('Delete question',['class'=>'btn btn-danger '])}} 
+        {{ Form::close() }}
         @endforeach
         <div class="container col-sm-4">
             {{ $quiz->QuestionPaginate()->links() }}
-            
+
         </div>
     </ul>
 
+
+    
+    
     <div class=" col-sm-4">        
         <p><a href="/{{$quiz->name}}/CreateQuestion">Add question</a></p>
     </div>
     <div class=" col-sm-4">
-        <p><a href="/{{$quiz->name}}/1">Check results</a></p>
+        <p><a href="grade/{{$quiz->name}}/1">Check results</a></p>
     </div>
 
 
@@ -69,56 +69,53 @@
 <script>
     function makenewquestion() {
 
-     window.location='/'+{{$quiz->name}}+'/CreateQuestion';
+    window.location = '/' + {{$quiz->name}} + '/CreateQuestion';
     }
 
     $(document).ready(function () {
 
-        $('.list-group-item').click(function () {
-            var element = document.getElementById($(this).attr('id'));
-            var ansid = Number($(this).attr('id').slice(6));
-            var qid = $(this).attr('data-qid');
-            // console.log(qid);   
-
-            addanswer(ansid, qid);
-
-        });
-
+    $('.list-group-item').click(function () {
+    var element = document.getElementById($(this).attr('id'));
+    var answerid = Number($(this).attr('id').slice(6));
+    var questionid = $(this).attr('data-qid');
+    var code = window.location.pathname.slice(1, 16);
+    //  console.log(code);  
+    addanswer(answerid, questionid, code);
     });
+    });
+    function addanswer(temp, temp2, code) {
 
-    function addanswer(temp, temp2) {
+    // document.getElementById('up_vote_comment' + temp).innerHTML = vote + 1;
 
-        // document.getElementById('up_vote_comment' + temp).innerHTML = vote + 1;
-
-        var useranswerid = temp;
-        var questionid = temp2;
-        console.log(window.location.host);
-        
-        console.log(window.location.href);
-        var _token = $("input[name='_token']").val();
-        $.ajax({
-            method: "POST",
+    var answerid = temp;
+    var questionid = temp2;
+    var quizcode = code;
+    console.log(answerid);
+    //  console.log(window.location.href);
+    var _token = $("input[name='_token']").val();
+    $.ajax({
+    method: "POST",
             url: '/addajaxanswer',
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            data: { _token:_token , useranswerid: useranswerid, questionid: questionid}
-        })
-                .done(function (data) {
-                    //    console.log('merge');
-                    var element = document.getElementById('answer' + useranswerid);
-                    element.classList.remove('list-group-item-success');
-                    console.log(data['useranswer']);
-
-                    if (data['useranswer'] != 0) {
-                        element.classList.add('list-group-item-success');
-                        console.log('merge');
-                    }
-                }).fail(function($xhr){
-                      var data = $xhr.responseJSON;
-                    console.log(data);
-                    });
+            data: { _token:_token, answerid: answerid, questionid: questionid, quizcode:quizcode}
+    })
+            .done(function (data) {
+            //    console.log('merge');
+            var element = document.getElementById('answer' + answerid);
+            element.classList.remove('list-group-item-success');
+            console.log(data['status']);
+            if (data['answer'] != 0) {
+            element.classList.add('list-group-item-success');
+            //   console.log('merge');
             }
+          //  console.log(data['userid']);
+            }).fail(function($xhr){
+    var data = $xhr.responseJSON;
+    console.log(data);
+    });
+    }
 </script>
 
 @endsection

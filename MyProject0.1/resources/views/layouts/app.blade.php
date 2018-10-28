@@ -8,7 +8,7 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        
+
 
         <title>{{ config('app.name', 'Godaddy DCOps') }}</title>
 
@@ -87,26 +87,26 @@
 
             /*login page*/
             .center_login {
-                
+
                 margin: auto;
                 width: 50%;
                 top: 80%;
-                    
+
             }
 
             .background_green {
-    
+
                 background-color: #00a63f;    
-          
+
             }
 
             /*login register*/
             .center_register {
-                
+
                 margin: auto;
                 width: 70%;
                 top:40%;
-                                    
+
             }
 
             /*General Center*/
@@ -119,11 +119,51 @@
             }
 
             /*Flip Main page*/
+            /*dropdown menu*/
+            .dropbtn {
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+             .dropbtn2 {
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
 
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
 
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
 
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
 
-                   
+            .dropdown-content a:hover {background-color: #ddd;}
+
+            .dropdown:hover .dropdown-content {display: block;}
+
+            .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+            /*end*/
+
         </style>
     </head>
     <body >
@@ -140,15 +180,29 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-
                         </ul>
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
                             @guest
+                            
+                            <div class="dropdown">
+                                <button class="dropbtn">Menu</button>
+                                <div class="dropdown-content">
+                                    <a href="/home" >Home</a>
+                                    <a href="/CreateGuestUser" >Create User</a>
+                                    <a href="/LoginUser" >Login Page with code</a>
+                                    <a href="/ListUser"  >Assign User to Quiz</a>
+                                    <a href="/CreateQuiz" >Create quiz</a>
+                                    <a  href="{{ route('login') }}"><strong>{{ __('Login') }}</strong></a>
+                                </div>
+                            </div>
+
+
+
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}"><strong>{{ __('Login') }}</strong></a>
+                               
                             </li>
 
                             @else
@@ -169,12 +223,10 @@
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                       
+
                                         @csrf
                                     </form>
 
-
-                                   
                                 </div>
                             </li>
                             @endguest

@@ -77,9 +77,8 @@
         @endforeach
     </div>  
 
-    <div class="container col-sm-4">
-
-
+    <div class=" col-sm-4">        
+        <p><a href="/{{$quiz->name}}/CreateQuestion">Add question</a></p>
     </div>
 </ul>
 

@@ -24,15 +24,15 @@ class GuestUserController extends Controller {
     }
 
     public function store(Request $request) {
-        //      $validatedData = $request->validate([
-        //          'title' => 'required|unique:quizzes|max:100|min:3',
+              $validatedData = $request->validate([
+                  'email' => 'required|unique:guest_users|max:100|min:3',
         //         'name' => 'required|unique:quizzes|max:40|min:3',
         //          'body' => 'max:500',
-        //     ]);
+             ]);
 
         $GuestUser = new GuestUser();
         $GuestUser->email = $request->email;
-        $GuestUser->password =0;
+        $GuestUser->password = str_random(8);;
         $GuestUser->code = 0;
         $GuestUser->info1 = 0;
         $GuestUser->info2 = 0;

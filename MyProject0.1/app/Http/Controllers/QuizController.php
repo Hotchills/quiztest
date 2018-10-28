@@ -20,7 +20,15 @@ class QuizController extends Controller {
         return view('CreateQuiz');
     }
 
-    public function startquiz($main) {
+    public function startquiz($code,$main) {
+        //
+        if ($quiz = Quiz::where('name', $main)->first()) {
+            $questions = $quiz->question;
+            return view('quiz', compact('quiz', 'questions','code'));
+        }
+        abort(404);
+    }
+        public function showquiz($main) {
         //
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;

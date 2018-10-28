@@ -35,19 +35,31 @@ class AssignedQuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-
-        $Assigne = new AssignedQuiz();
-        $Assigne->quiz_id = $request->QuizID;
-        $Assigne->guestuser_id = $request->guestuserid;
-        $Assigne->code = str_random(15);
-        $Assigne->grade = 0;
-        $Assigne->time = 0;
-        $Assigne->start_at = date('Y-m-d H:i:s');
-        $quiz = Quiz::where('id', $Assigne->quiz_id)->first();
-        $guestuser = GuestUser::where('id', $Assigne->guestuser_id)->first();
-        $Assigne->quiz()->associate($quiz);
-        $Assigne->guestuser()->associate($guestuser);
-        $Assigne->save();
+         
+      $validatedData = $request->validate([
+                  'QuizID' => 'required|not_in:Select quiz',
+        //         'name' => 'required|unique:quizzes|max:40|min:3',
+        //          'body' => 'max:500',
+             ]);
+      if( AssignedQuiz::where('quiz_id',$request->QuizID)->where('guestuser_id',$request->guestuserid)->first() )
+      {
+          
+          return redirect()->back()->withErrors('Quiz already assigned to this user');
+      }
+      
+        $assign = new AssignedQuiz();
+        $assign->quiz_id = $request->QuizID;
+        $assign->guestuser_id = $request->guestuserid;
+        $assign->code = str_random(15);
+        $assign->grade = 0;
+        $assign->time = 0;
+        $assign->start_at = date('Y-m-d H:i:s');
+        $quiz = Quiz::where('id', $assign->quiz_id)->first();
+        $guestuser = GuestUser::where('id', $assign->guestuser_id)->first();
+        $assign->quiz()->associate($quiz);
+        $assign->guestuser()->associate($guestuser);
+        $assign->save();
+        
           return redirect()->back()->with('message', 'Quiz added to User');
     }
 
@@ -58,13 +70,16 @@ class AssignedQuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request) {
-             $temp=$request->code;
-        $assignedquiz=AssignedQuiz::where("code",$temp)->first();
+        $temp=$request->code;
+        if($assignedquiz=AssignedQuiz::where("code",$temp)->first()){
         $quiz=Quiz::where("id",$assignedquiz->quiz_id)->first();
         
-       // return redirect()->back()->with('message', $quiz->name);
-        return redirect()->to('/' . $quiz->name)->with('message', 'Good Luck');
-    }
+        return redirect()->to('/' . $temp . '/' . $quiz->name)->with('message', 'Good Luck');
+ 
+        
+        }
+        return redirect()->to('/LoginUser')->withErrors('bad code');
+}
 
     /**
      * Show the form for editing the specified resource.

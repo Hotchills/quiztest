@@ -44,17 +44,13 @@
             @endforeach
         </ul>
     </div>
-   <div class="container">
-     <a href="/CreateGuestUser" class="btn btn-success">Create User</a>
-        <a href="/ListUser" class="btn btn-info ">Assign User to Quiz</a>
-        <a href="/LoginUser" class="btn btn-info ">Login User Page</a>
-        
-        
-    <button type="button" class="btn btn-warning" value="Input Button" onclick="makenewquiz()">Add quiz</button>
-</div>
+
+    <div class="container">
+
+    </div>
 </div>
 
-    <script>
+<script>
     function makenewquiz() {
 
         location.href = "{{route('CreateQuiz')}}";

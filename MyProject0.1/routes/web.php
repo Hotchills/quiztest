@@ -23,8 +23,6 @@ Route::get('/admin', function () {
 
 
 Route::post('/AssignedQuiz', ['uses'=> 'AssignedQuizController@store','as'=>'assignedquiz.store' ]);
-
-
 Route::post('/CreateQuiz', ['uses'=> 'QuizController@store','as'=>'quiz.store' ]);
 Route::post('/CreateGuestUser', ['uses'=> 'GuestUserController@store','as'=>'guestuser.store' ]);
 Route::post('/AddAnswersToQuestion', ['uses'=> 'AnswerController@store','as'=>'addanswers.store' ]);
@@ -45,9 +43,11 @@ Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
 Route::get('/CreateGuestUser', 'GuestUserController@index')->name('CreateGuestUser');
 Route::get('/ListUser', 'GuestUserController@showusers')->name('ListGuestUser');
 Route::get('/{main}/CreateQuestion', 'QuestionController@index')->name('CreateQuestion');
-Route::get('/{main}','QuizController@startquiz');
+Route::get('/{code}/{main}','QuizController@startquiz');
+Route::get('/{main}','QuizController@geteditquiz');
 Route::get('/edit/{main}','QuizController@geteditquiz');
-Route::get('/{main}/{user}','QuizController@Checkquizresult')->name('Checkquizresult');
+Route::get('grade/{main}/{user}','QuizController@Checkquizresult')->name('Checkquizresult');
+
 
 
 Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('addanswerstoquestion');

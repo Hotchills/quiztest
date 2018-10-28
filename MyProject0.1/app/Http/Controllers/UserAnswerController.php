@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\UserAnswer;
 use App\Question;
 use App\User;
+use App\GuestUser;
+use App\AssignedQuiz;
 use Illuminate\Http\Request;
 
 class UserAnswerController extends Controller {
@@ -105,7 +107,7 @@ class UserAnswerController extends Controller {
                     $tempUser->question_id = $id;
                     $tempUser->user_id = 1;
                     $tempUser->save();
-                    $user = User::find(1);
+                    $user = GuestUser::find(1);
                     $question = Question::find($id);
                     $tempUser->user()->associate($user);
                     $tempUser->question()->associate($question);
@@ -125,35 +127,52 @@ class UserAnswerController extends Controller {
 
     public function addajaxanswer(Request $request) {
 
-        $useranswerid = $request->useranswerid;
-        $questionid = $request->questionid;
+        $answerid = $request->answerid;
+         
+        $questionid = $request->questionid;   
+       
+        $quizcode = $request->quizcode;
+        
+        if($useridtemp = AssignedQuiz::where('code',$quizcode)->first()){
+            
+        $userid = $useridtemp->guestuser_id;
+        // return response()->json(['status' => $userid], 201);
         //$user = Auth::user();
-        if ($tempUser = UserAnswer::where('user_id', 1)->where('question_id', $questionid)->where('body', $useranswerid)->first()) {
+        if ($tempUser = UserAnswer::where('user_id', $userid)->where('question_id', $questionid)->where('body', $answerid)->first()) {
 
             $tempUser->body = 0;
             $tempUser->save();
             
-        } elseif ($tempUser = UserAnswer::where('user_id', 1)->where('question_id', $questionid)->where('body', 0)->first()) {
+        } elseif ($tempUser = UserAnswer::where('user_id', $userid)->where('question_id', $questionid)->where('body', 0)->first()) {
 
-            $tempUser->body = $useranswerid;
+            $tempUser->body = $answerid;
             $tempUser->save();
             
         } else {
-
+ 
             $tempUser = new UserAnswer;
-            $tempUser->body = $useranswerid;
+            $tempUser->body = $answerid;
             $tempUser->question_id = $questionid;
-            $tempUser->user_id = 1;
-            $tempUser->save();
-            $user = User::find(1);
+            $tempUser->user_id = $userid;
+            $user = GuestUser::where('id',$userid)->first();
             $question = Question::find($questionid);
-            $tempUser->user()->associate($user);
+            $tempUser->save();
+            $tempUser->guestuser()->associate($user);
             $tempUser->question()->associate($question);
-        }
+            
+            
+            
+           
 
-        //    return response()->json(['status' => 'success'], 201);
-        return response()->json(['useranswer' => $tempUser->body, 'questionid' => $questionid]);
-    }
+        }
+         return response()->json(['answer' => $tempUser->body, 'questionid' => $questionid,'userid'=>$userid]);
+
+        
+        }else
+            
+       // return response()->json(['message' => 'error']);
+                return response()->json(['status' => 'fail'], 201);
+ }
 
     /**
      * Remove the specified resource from storage.
