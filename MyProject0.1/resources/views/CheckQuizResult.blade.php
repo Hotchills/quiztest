@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="col-sm-3 col-md-3 col-xs-3">
-
+@if(0)
                     @if(!$answer->Getcorrectanswers())
                     @if($question->CompareUserAnswer($answer->id, $code))
                     <div Style='color: red;'>bad </div>             
@@ -50,7 +50,7 @@
                  <div Style='color: red;'> bad </div>  
                     @endif   
                     @endif
-
+@endif
 
                 </div>
             </div>
