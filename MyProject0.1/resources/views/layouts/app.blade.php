@@ -185,9 +185,7 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
-                            @guest
-                            
-                            <div class="dropdown">
+                                        <div class="dropdown">
                                 <button class="dropbtn">Menu</button>
                                 <div class="dropdown-content">
                                     <a href="/home" >Home</a>
@@ -199,11 +197,9 @@
                                 </div>
                             </div>
 
+                            @guest
+                
 
-
-                            <li class="nav-item">
-                               
-                            </li>
 
                             @else
                             <li class="nav-item dropdown">
