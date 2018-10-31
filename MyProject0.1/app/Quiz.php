@@ -29,4 +29,12 @@ public function QuestionPaginate(){
   return $questions;
 }
 
+public function getgrate($code){
+
+  $grade = AssignedQuiz::where('code',$code)->first()->grade;
+           
+  
+  return $grade;
+}
+
 }

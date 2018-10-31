@@ -6,8 +6,8 @@
 <div class="quiz-box card">
     <div class="card-header">
         <h1>Quiz ID: <strong>{{$quiz->id}} &nbsp </strong>Quiz Name: <strong> {{$quiz->name}}</strong></h1>
-        <h1>{{$quiz->title}}</h1>
-        <h1>User ID :  1 </h1>
+        <h2>{{$quiz->title}}</h2>
+        <h4>CODE :  {{$code}} </h4>
     </div>
     <br>
     <ul class="list-group container">
@@ -35,33 +35,36 @@
 
                 </div>
 
-
-
                 <div class="col-sm-3 col-md-3 col-xs-3">
 
                     @if(!$answer->Getcorrectanswers())
-                    
-                    -
+                    @if($question->CompareUserAnswer($answer->id, $code))
+                    <div Style='color: red;'>bad </div>             
+                    @endif   
+
                     @elseif($answer->Getcorrectanswers()->answer_id == $answer->id )
-                    &#10004
-                    @endif
 
                     @if($question->CompareUserAnswer($answer->id, $code))
-                user clicked              
-                    @endif      
+                   <div Style='color: green;'> &#10004 good   </div>  
+                    @else
+                 <div Style='color: red;'> bad </div>  
+                    @endif   
+                    @endif
+
+
                 </div>
             </div>
 
-</li>
-            @endforeach
-            <br>
+        </li>
+        @endforeach
+        <br>
 
-            @endforeach
+        @endforeach
 
     </ul>
 
-    <div class=" col-sm-4">
-
+    <div class="container">
+       <h1><strong> Grade : {{$quiz->getgrate($code)}}%</strong></h1>
     </div>
 
 </div>

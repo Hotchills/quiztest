@@ -19,7 +19,7 @@
                     <p>Is assigned to : </p>
                     <ul class="list-group" >
                         @foreach($guestuser->assignedq() as $assigned)
-                        <li  class="list-group-item" ><strong> ID:</strong>{{ $assigned->quiz_id }}<strong> CODE: </strong>{{ $assigned->code }}</li>
+                        <li  class="list-group-item" ><strong> ID:</strong>{{ $assigned->quiz_id }}<strong> CODE: </strong>{{ $assigned->code }} @if($assigned->grade>0)<strong> Grade: </strong>{{ $assigned->grade }}%@endif</li>
                         @endforeach                  
                     </ul>
 

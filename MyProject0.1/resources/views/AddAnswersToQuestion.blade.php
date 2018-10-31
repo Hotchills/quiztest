@@ -40,7 +40,24 @@
 
             </div>
 
+            <div  class="col-sm-1 col-md-1 btn-sm">
+                @if(!$answer->Getcorrectanswers())
 
+                {{ Form::open(['method' => 'PUT', 'route' => ['correctanswer.store', $question->id]]) }}
+                {{Form::hidden('answerid',$answer->id)}}
+                {{Form::submit('Correct',['class'=>'btn btn-success '])}} 
+                {{ Form::close() }}
+
+                @elseif($answer->Getcorrectanswers()->answer_id == $answer->id )
+               
+                {{ Form::open(['method' => 'DELETE', 'route' => ['delcorrectanswer.delete', $answer->Getcorrectanswers()->id]]) }}
+                {{Form::hidden('questionid',$question->id)}}
+                {{Form::submit('Remove correct',['class'=>'btn btn-danger '])}} 
+                {{ Form::close() }}
+                
+                @endif
+
+            </div>
         </li>
     </div>
     @endforeach

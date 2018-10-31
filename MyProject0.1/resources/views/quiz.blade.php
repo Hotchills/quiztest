@@ -21,17 +21,17 @@
         </div>
         @foreach($quiz->QuestionPaginate() as $question)
         <div class="question-box">
-            <li><h3><span class="badge badge-success" id="">{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}}</strong></h3>
+            <li><h3><span class="badge badge-success" id="">{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}} ID:{{$question->id}}</strong></h3>
             </li>
             <br>
             <ul class="list-group row" >
                 @foreach($question->Answers() as $answer)
 
                 @if($question->UserAnswers($answer->id,$code))
-                <li class="list-group-item list-group-item-success" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}}</li>
+                <li class="list-group-item list-group-item-success" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}} ID:{{$answer->id}}</li>
 
                 @else   
-                <li class="list-group-item" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}}</li>
+                <li class="list-group-item" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}} ID:{{$answer->id}}</li>
 
                 @endif  
                 @endforeach
@@ -105,7 +105,7 @@
             //    console.log('merge');
             var element = document.getElementById('answer' + answerid);
             element.classList.remove('list-group-item-success');
-            console.log(data['status']);
+            console.log(data['grade']);
             if (data['answer'] != 0) {
             element.classList.add('list-group-item-success');
             //   console.log('merge');
