@@ -5,6 +5,7 @@ namespace App;
 use App\Answer;
 use App\UserAnswer;
 use App\AssignedQuiz;
+use App\CorrectAnswers;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model {
@@ -20,6 +21,10 @@ class Question extends Model {
 
     public function answer() {
         return $this->hasMany('App\Answer');
+    }
+
+    public function correctanswers() {
+        return $this->hasMany('App\CorrectAnswers');
     }
 
     public function useranswer() {
@@ -39,16 +44,24 @@ class Question extends Model {
             if ($answer = UserAnswer::where('question_id', $this->id)->where('user_id', $userid->guestuser_id)->where('body', $temp)->first())
                 if ($answer->body != 0)
                     return true;
-                
-                
-                    return false;
+
+
+        return false;
     }
 
-    public function UserAnswers2() {
+    public function CompareUserAnswer($temp, $code) {
 
-        $answers = UserAnswer::where("question_id", $this->id)->where('user_id', 1)->get();
+        if ($userid = AssignedQuiz::where('code', $code)->first())
+            if( $answer = UserAnswer::where("question_id", $this->id)->where('user_id', $userid->id)->where('body',$temp)->first())
+                 return true;
+        return false;
+    }
 
-        return $answers;
+    public function Getcorrectanswers() {
+
+        $tmep2 = CorrectAnswers::where('question_id', $this->id)->first();
+
+        return $tmep2;
     }
 
 }

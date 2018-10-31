@@ -34,8 +34,10 @@ class GuestUser extends Model {
     
     public function assignedq() {
         
-        $assignedq = AssignedQuiz::where('guestuser_id',$this->id)->get();      
+        if($assignedq = AssignedQuiz::where('guestuser_id',$this->id)->get())      
         return $assignedq;
+        else
+            return false;
     }
     
     public function useranswer() {

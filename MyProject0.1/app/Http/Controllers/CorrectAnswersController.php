@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\CorrectAnswers;
 use Illuminate\Http\Request;
+use App\Answer;
+use App\Question;
 
-class CorrectAnswersController extends Controller
-{
+class CorrectAnswersController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -22,8 +23,7 @@ class CorrectAnswersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -33,9 +33,22 @@ class CorrectAnswersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store($id, Request $request) {
+        $question = Question::where('id', $id)->first();
+        if ($question->question_nr == NULL)
+            $question->question_nr = 1;
+        else
+            $question->question_nr = $question->question_nr + 1;
+$question->save();
+        $answer = Answer::where('id', $request->answerid)->first();
+        $correctanswer = new CorrectAnswers();
+        $correctanswer->question_id = $id;
+        $correctanswer->body = 0;
+        $correctanswer->answer_id = $request->answerid;
+        $correctanswer->question()->associate($question); // associate the question to the quiz
+        $correctanswer->answer()->associate($answer); // associate the question to the quiz
+        $correctanswer->save();
+        return redirect()->back()->with('message', 'Correct answer added');
     }
 
     /**
@@ -44,8 +57,7 @@ class CorrectAnswersController extends Controller
      * @param  \App\CorrectAnswers  $correctAnswers
      * @return \Illuminate\Http\Response
      */
-    public function show(CorrectAnswers $correctAnswers)
-    {
+    public function show(CorrectAnswers $correctAnswers) {
         //
     }
 
@@ -55,8 +67,7 @@ class CorrectAnswersController extends Controller
      * @param  \App\CorrectAnswers  $correctAnswers
      * @return \Illuminate\Http\Response
      */
-    public function edit(CorrectAnswers $correctAnswers)
-    {
+    public function edit(CorrectAnswers $correctAnswers) {
         //
     }
 
@@ -67,8 +78,7 @@ class CorrectAnswersController extends Controller
      * @param  \App\CorrectAnswers  $correctAnswers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CorrectAnswers $correctAnswers)
-    {
+    public function update(Request $request, CorrectAnswers $correctAnswers) {
         //
     }
 
@@ -78,8 +88,18 @@ class CorrectAnswersController extends Controller
      * @param  \App\CorrectAnswers  $correctAnswers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CorrectAnswers $correctAnswers)
-    {
-        //
+    public function destroy($id,Request $request) {
+        
+         $question = Question::where('id',$request->questionid)->first();
+        if ($question->question_nr == NULL)
+            $question->question_nr = 0;
+        else
+            $question->question_nr = $question->question_nr-1;
+        
+        $question->save();
+        CorrectAnswers::destroy($id);
+
+        return redirect()->back()->with('message', 'CorrectAnswer removed');
     }
+
 }

@@ -83,26 +83,19 @@ class QuestionController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
-     */
+    
     public function update($id, Request $request) {
 
         $question = Question::where('id', $id)->first();
         $question->question_nr = $request->answerid;
         $question->save();
         return redirect()->back()->with('message', 'Correct answer added');
-        //
+        
     }
+ */
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id) {
 
-     
-      
         Question::destroy($id);
 
         return redirect()->back()->with('message', 'Question has been deleted');

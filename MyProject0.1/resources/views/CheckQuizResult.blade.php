@@ -11,65 +11,52 @@
     </div>
     <br>
     <ul class="list-group container">
-        @foreach($questions as $question)
+        @foreach($questions as $indexKey =>$question)
 
-        <li class="list-group-item list-group-item-success">   <h2>{{ $question->body }} / {{$question->question_nr}} :  </h2>
+        <li class="list-group-item list-group-item-success"><h2>{{$indexKey+1 }}.{{ $question->body }} / {{$question->question_nr}} :  </h2>
         </li>  
 
-        @foreach($question->answers() as $answer)  
+        @foreach($question->answers() as $indexKey2 => $answer)  
         <li class="list-group-item">
-            @if($answer->id == $question->question_nr)
             <div class="row" >
+                <div class="col-sm-7 col-md-7 col-xs-7" ><h4>
 
-                <div class="col-sm-7 col-md-7 col-xs-7" ><h4>{{$answer->id }}. {{$answer->body }} &#10004</h4>
+
+                        {{$indexKey2+1 }}. {{$answer->body }} 
+
+                        @if(!$answer->Getcorrectanswers())
+                        -
+                        @elseif($answer->Getcorrectanswers()->answer_id == $answer->id )
+                        &#10004
+                        @endif
+
+                    </h4>
+
+
                 </div>
+
+
+
                 <div class="col-sm-3 col-md-3 col-xs-3">
-                    @foreach($question->UserAnswers2() as $useranswer)
-                    @if( $useranswer->body  == $answer->id )
 
-                    <h3> <strong Style="color: green;"> &#10004  good</strong> </h3>
+                    @if(!$answer->Getcorrectanswers())
+                    
+                    -
+                    @elseif($answer->Getcorrectanswers()->answer_id == $answer->id )
+                    &#10004
                     @endif
-                    @endforeach
-                </div>
 
-            </div>
-            @else
-            <div class="row">
-                <div class="col-sm-7 col-md-7 col-xs-7"><h4>{{$answer->id }}. {{$answer->body }} </h4>
+                    @if($question->CompareUserAnswer($answer->id, $code))
+                user clicked              
+                    @endif      
                 </div>
-                <div class="col-sm-3 col-md-3 col-xs-3">
-                    @foreach($question->UserAnswers2() as $useranswer)
-                    @if( $useranswer->body  == $answer->id )
-                    <h3>  <strong Style="color: red;"> X bad </strong> </h3>
-                    @endif
-                    @endforeach
-
-                </div> 
             </div>
-            @endif
+
+</li>
+            @endforeach
+            <br>
 
             @endforeach
-        </li>
-
-        @if(0)
-        <div class="col-xs-4 col-md-4 col-sm-4">
-            @foreach($question->UserAnswers2() as $useranswer)
-
-            <li> 
-                @if( $useranswer->body  == $question->question_nr)
-                <button class='btn btn-success'> good</button>
-                @else
-                <button class='btn btn-danger'> bad </button>
-                @endif
-                {{$useranswer->body}}
-            </li> 
-            @endforeach
-        </div>   
-        @endif
-
-        <br>
-
-        @endforeach
 
     </ul>
 

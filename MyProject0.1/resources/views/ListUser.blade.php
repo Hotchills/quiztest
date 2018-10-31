@@ -5,52 +5,56 @@
 
 <h2>List of Users :</h2>
 <br>
-<ul class="list-group row" >
+<ul class="list-group" >
+
     @foreach($guestusers as $guestuser)
+    <div class="row">
+        <li class="list-group-item col-md-12 col-xs-12 col-sm-12">
+            <h3>{{$guestuser->id}}. {{$guestuser->email}} </h3>
 
-    <li class="list-group-item"><h3>{{$guestuser->id}}. {{$guestuser->email}} </h3>
+            <div class="row">
 
-        <p>Is assigned to : </p>
-        @foreach($guestuser->assignedq() as $assigned)
-        <ul>
-            
-       
-      <li><strong> ID:</strong>{{ $assigned->quiz_id }}<strong> CODE: </strong>{{ $assigned->code }}</li>
- </ul>
-        @endforeach
+                <div class="col-md-8 col-xs-8 col-sm-8">
 
-        <div class="row">
-            
+                    <p>Is assigned to : </p>
+                    <ul class="list-group" >
+                        @foreach($guestuser->assignedq() as $assigned)
+                        <li  class="list-group-item" ><strong> ID:</strong>{{ $assigned->quiz_id }}<strong> CODE: </strong>{{ $assigned->code }}</li>
+                        @endforeach                  
+                    </ul>
+
+                </div>
+                <div class="col-md-4 col-xs-4 col-sm-4">
+
+                    <form action='/AssignedQuiz' method="POST" class="form-horizontal">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6 col-sm-6">
+                                <select class="form-control" name="QuizID">
+
+                                    <option>Select quiz</option>
+
+                                    @foreach($quizzes as $quiz)
+                                    <option value="{{ $quiz->id }}" > {{ $quiz->name }} </option>
+                                    @endforeach    
+                                </select>
+                            </div>
+                            <div class="col-md-5 col-xs-5 col-sm-5">
+                                <input type="hidden" id="guestuserid" name="guestuserid" value="{{$guestuser->id}}">
 
 
-                <form action='/AssignedQuiz' method="POST" class="form-horizontal">
-                    {{ csrf_field() }}
-
-
-                    <select class="form-control" name="QuizID">
-
-                        <option>Select quiz</option>
-
-                        @foreach($quizzes as $quiz)
-                        <option value="{{ $quiz->id }}" > {{ $quiz->name }} </option>
-                        @endforeach    
-                    </select>
-
-                    <input type="hidden" id="guestuserid" name="guestuserid" value="{{$guestuser->id}}">
-                   
-                    
-                        <button type="submit" class="btn btn-default">
-                            Assign
-                        </button>
-                   
-                </form>
+                                <button type="submit" class="btn btn-success">
+                                    Assign
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-    </li>
+        </li>
+    </div>
     <br>
     @endforeach
-
-    <br>
 
 </ul>
 

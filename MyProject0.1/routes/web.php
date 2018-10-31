@@ -34,7 +34,7 @@ Route::post('/LoginUser', ['uses'=> 'AssignedQuizController@show','as'=>'logingu
 
 Auth::routes();
 
-
+Route::get('grade/{code}','QuizController@checkquizresult')->name('Checkquizresult');
 Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('addanswerstoquestion');
 Route::get('/edit/{main}','QuizController@geteditquiz');
 Route::get('/home', 'HomeController@index')->name('home');
@@ -43,18 +43,19 @@ Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
 Route::get('/CreateGuestUser', 'GuestUserController@index')->name('CreateGuestUser');
 Route::get('/ListUser', 'GuestUserController@showusers')->name('ListGuestUser');
 Route::get('/{main}/CreateQuestion', 'QuestionController@index')->name('CreateQuestion');
-Route::get('/{code}/{main}','QuizController@startquiz');
 Route::get('/{main}','QuizController@geteditquiz');
+Route::get('/{code}/{main}','QuizController@startquiz');
 
-Route::get('grade/{main}/{user}','QuizController@Checkquizresult')->name('Checkquizresult');
+
 
 
 
 Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('addanswerstoquestion');
 
-Route::put('/AddCorrectAnswersToQuestion/{id}', 'QuestionController@update')->name('correctanswer.update');
+Route::put('/AddCorrectAnswersToQuestion/{id}', 'CorrectAnswersController@store')->name('correctanswer.store');
 Route::put('/Useranswer/{id}', 'UserAnswerController@update')->name('useranswer.update');
 
-Route::delete('/AddAnswersToQuestion/{id}', 'AnswerController@destroy')->name('delanswer.delete');
+Route::delete('/DelAnswersToQuestion/{id}', 'AnswerController@destroy')->name('delanswer.delete');
+Route::delete('/DelCorrectAnswersToQuestion/{id}', 'CorrectAnswersController@destroy')->name('delcorrectanswer.delete');
 Route::delete('/delquestion/{id}', 'QuestionController@destroy')->name('delquestion.delete');
 Route::delete('/delquiz/{id}', 'QuizController@destroy')->name('delquiz.delete');

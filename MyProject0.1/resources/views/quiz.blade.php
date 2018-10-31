@@ -52,13 +52,13 @@
     </ul>
 
 
-    
-    
+
+
     <div class=" col-sm-4">        
         <p><a href="/{{$quiz->name}}/CreateQuestion">Add question</a></p>
     </div>
     <div class=" col-sm-4">
-        <p><a href="grade/{{$quiz->name}}/1">Check results</a></p>
+        <p><a href='/grade/{{$code}}'>Check results</a></p>
     </div>
 
 
@@ -110,7 +110,7 @@
             element.classList.add('list-group-item-success');
             //   console.log('merge');
             }
-          //  console.log(data['userid']);
+            //  console.log(data['userid']);
             }).fail(function($xhr){
     var data = $xhr.responseJSON;
     console.log(data);

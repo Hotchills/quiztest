@@ -6,6 +6,9 @@ use App\Quiz;
 use App\Question;
 use App\User;
 use App\Answer;
+use App\GuestUser;
+use App\AssignedQuiz;
+use App\CorrectAnswers;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller {
@@ -20,15 +23,16 @@ class QuizController extends Controller {
         return view('CreateQuiz');
     }
 
-    public function startquiz($code,$main) {
+    public function startquiz($code, $main) {
         //
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
-            return view('quiz', compact('quiz', 'questions','code'));
+            return view('quiz', compact('quiz', 'questions', 'code'));
         }
         abort(404);
     }
-        public function showquiz($main) {
+
+    public function showquiz($main) {
         //
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
@@ -46,15 +50,13 @@ class QuizController extends Controller {
         abort(404);
     }
 
-    public function Checkquizresult($main, $user) {
+    public function checkquizresult($code) {
         //
-        if ($quiz = Quiz::where('name', $main)->first() && $user = User::find(1)) {
+        if ($tempcode = AssignedQuiz::where('code', $code)->first()) {
 
-            $quiz = Quiz::where('name', $main)->first();
-            $questions = Question::where('quiz_id', $quiz->id)->get();
-
-
-            return view('CheckQuizResult', compact('quiz', 'questions'));
+            $quiz = Quiz::where('id', $tempcode->quiz_id)->first();
+            $questions = Question::where('quiz_id', $tempcode->quiz_id)->get();
+            return view('CheckQuizResult', compact('quiz', 'questions','code'));
         }
         abort(404);
     }

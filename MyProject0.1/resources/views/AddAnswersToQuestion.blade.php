@@ -24,32 +24,25 @@
 <h2><strong>Answers for this question:</strong> </h2>
 
 <ul class="list-group" >
-    
+
     @foreach($question->Answers() as $answer)
-<div  class="list-group-item">
-    <li class="row"> 
+    <div  class="list-group-item">
+        <li class="row"> 
 
-        <div class="col-sm-9 col-md-9 col-xs-9"><h3>{{$answer->body}}</h3>
+            <div class="col-sm-9 col-md-9 col-xs-9"><h3>{{$answer->body}}</h3>
 
-        </div>
+            </div>
 
-        <div  class="col-sm-1 col-md-1  col-xs-1 btn-sm">
-            {{ Form::open(['method' => 'DELETE', 'route' => ['delanswer.delete', $answer->id]]) }}
-            {{Form::submit('Delete',['class'=>'btn btn-danger '])}} 
-            {{ Form::close() }}
+            <div  class="col-sm-1 col-md-1  col-xs-1 btn-sm">
+                {{ Form::open(['method' => 'DELETE', 'route' => ['delanswer.delete', $answer->id]]) }}
+                {{Form::submit('Delete',['class'=>'btn btn-danger '])}} 
+                {{ Form::close() }}
 
-        </div>
-                @if($question->question_nr != $answer->id)
-        <div  class="col-sm-1 col-md-1 btn-sm">
-            {{ Form::open(['method' => 'PUT', 'route' => ['correctanswer.update', $question->id]]) }}
-            {{Form::hidden('answerid',$answer->id)}}
-            {{Form::submit('Correct',['class'=>'btn btn-success '])}} 
-            {{ Form::close() }}
-        </div>
-        @endif
+            </div>
 
-    </li>
-</div>
+
+        </li>
+    </div>
     @endforeach
 </ul>
 <br>
@@ -67,5 +60,5 @@
 <h2><a href="/{{$quizname}}">Return to {{$quizname}}</a></h2>
 @else
 <h2><strong>Don't forget to add the correct answer by clicking  on the <button class="btn btn-success">Correct</button> button .</strong><h2>
-@endif
-@endsection
+        @endif
+        @endsection
