@@ -12,7 +12,7 @@ class AssignedQuizController extends Controller {
                 function __construct()
     {
         
-         $this->middleware('auth', ['except' => ['index','show']]);
+         $this->middleware('auth', ['except' => ['index','show','finishtest']]);
         
     }
 
@@ -81,11 +81,26 @@ class AssignedQuizController extends Controller {
         if($assignedquiz=AssignedQuiz::where("code",$temp)->first()){
         $quiz=Quiz::where("id",$assignedquiz->quiz_id)->first();
         
+        if($assignedquiz->time == 1){
+            
+         return redirect()->to('/LoginUser')->withErrors('Test has been done already');   
+        }
+        
         return redirect()->to('/' . $temp . '/' . $quiz->name)->with('message', 'Good Luck');
  
         
         }
         return redirect()->to('/LoginUser')->withErrors('bad code');
+}
+
+    public function finishtest(Request $request) {
+        $temp=$request->code;
+        if($assignedquiz=AssignedQuiz::where("code",$temp)->first()){
+        $assignedquiz->time=1;  
+        $assignedquiz->save();
+        return redirect()->to('/home')->with('message', 'Test Finished');
+        }
+        return redirect()->to('/home')->withErrors('bad code');
 }
 
     /**

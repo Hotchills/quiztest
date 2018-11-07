@@ -24,6 +24,7 @@ Route::post('/CreateQuestion', ['uses'=> 'QuestionController@store','as'=>'quest
 Route::post('/AddUserAnswer', ['uses'=> 'UserAnswerController@store','as'=>'useranswer.store' ]);
 Route::post('/addajaxanswer' , 'UserAnswerController@addajaxanswer');
 Route::post('/LoginUser', ['uses'=> 'AssignedQuizController@show','as'=>'loginguestuser.show' ]);
+Route::post('/FinishTest', ['uses'=> 'AssignedQuizController@finishtest','as'=>'finishtest.update' ]);
 
 Auth::routes();
 

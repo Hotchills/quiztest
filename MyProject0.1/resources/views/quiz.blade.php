@@ -53,6 +53,12 @@
             </ul>
 
         </div>
+         @if( $quiz->QuestionPaginate()->lastPage()== $quiz->QuestionPaginate()->firstItem() )
+       {{ Form::open(['method' => 'POST', 'route' => ['finishtest.update']]) }}
+       {{ Form::hidden('code', $code) }}
+        {{Form::submit('Finish Test ',['class'=>'btn btn-danger '])}} 
+        {{ Form::close() }}
+        @endif
         @auth
         {{ Form::open(['method' => 'DELETE', 'route' => ['delquestion.delete', $question->id]]) }}
         {{Form::submit('Delete question',['class'=>'btn btn-danger '])}} 
