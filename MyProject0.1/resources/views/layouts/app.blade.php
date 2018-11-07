@@ -121,17 +121,46 @@
             /*Flip Main page*/
             /*dropdown menu*/
             .dropbtn {
-               
+                background-color: #4CAF50;
                 color: white;
                 padding: 16px;
                 font-size: 16px;
-                border-radius: 3px;
+                border: none;
+            }
+             .dropbtn2 {
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
             }
 
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
 
-            .dropbtn:focus {background-color: #f8f9fa;}
-            .dropbtn:active {background-color: #f8f9fa;}
-            .dropbtn:hover {background-color: #f8f9fa;}
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            .dropdown-content a:hover {background-color: #ddd;}
+
+            .dropdown:hover .dropdown-content {display: block;}
+
+            .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
             /*end*/
 
@@ -157,31 +186,33 @@
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
 
-                                 @if(0)   <a  href="{{ route('login') }}"><strong>{{ __('Login') }}</strong></a>
+                            @if(0)        <a  href="{{ route('login') }}"><strong>{{ __('Login') }}</strong></a>
 @endif
-
                             @guest
 
                             @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle dropbtn" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <strong>Menu<span class="caret"></span> </strong>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <strong>{{ Auth::user()->name }} <span class="caret"></span> </strong>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="/home" >Home</a>
-                                    <a class="dropdown-item" href="/CreateGuestUser" >Create User</a>
-                                    <a class="dropdown-item" href="/LoginUser" >Login Page with code</a>
-                                    <a class="dropdown-item" href="/ListUser"  >Assign User to Quiz</a>
-                                    <a class="dropdown-item" href="/CreateQuiz" >Create quiz</a>
-                                    
-                                    
+                                    <a  class="dropdown-item" href="/home" >Home</a>
+                                    <a   class="dropdown-item" href="/CreateGuestUser" >Create User</a>
+                                    <a  class="dropdown-item" href="/LoginUser" >Login Page with code</a>
+                                    <a  class="dropdown-item" href="/ListUser"  >Assign User to Quiz</a>
+                                    <a  class="dropdown-item" href="/CreateQuiz" >Create quiz</a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}  
                                     </a>
 
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+
+                                        @csrf
+                                    </form>
 
                                 </div>
                             </li>
