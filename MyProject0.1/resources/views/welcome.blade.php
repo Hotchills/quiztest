@@ -24,9 +24,9 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-
+   <!-- @import url(https://fonts.googleapis.com/css?family=Open+Sans);  -->
         <style>
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+      
 
 body {
     background: #02C54C;
@@ -66,7 +66,7 @@ label {
         width: 100%;
         background: #02C54C;
         text-align: center;
-        line-height: px;
+      
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         
@@ -95,8 +95,8 @@ input {
 }
 
 label:hover :checked + .card {
-    transform: rotateX(160deg);
-    -webkit-transform: rotateX(160deg);
+    transform: rotateX(180deg);
+    -webkit-transform: rotateX(180deg);
     box-shadow: 0 20px 20px rgba(255,255,255,.2);
 }
  .center_login {
@@ -127,6 +127,7 @@ label:hover :checked + .card {
 
                                 {{Form::open(['route'=>'loginguestuser.show','method'=>'POST'])}}
                                 {{Form::label('code','Insert Code:')}}
+                                <br>
                                 {{Form::text('code','',['class'=>'form-control'])}}
 
 
