@@ -12,6 +12,13 @@ use App\CorrectAnswers;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller {
+    
+            function __construct()
+    {
+        
+         $this->middleware('auth', ['except' => ['startquiz']]);
+        
+    }
 
     /**
      * Display a listing of the resource.

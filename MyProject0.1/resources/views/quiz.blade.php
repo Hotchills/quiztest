@@ -5,33 +5,45 @@
 
 <div class="quiz-box card">
     <div class="card-header">
+        @auth
         <h1>Name: <strong> {{$quiz->name}}</strong></h1>
-        <h1>{{$quiz->title}}</h1>
+        
         <p>Debug info quizID: <strong>{{$quiz->id}}</strong></p> 
+        @endauth
+        <h1>{{$quiz->title}}</h1>
     </div>
 
     <ul class="card-body" Style="list-style: none;">
         <div class="row">       
-            <div class=" col">          
+            <div class=" col">  
+               
+                @if($quiz->QuestionPaginate()->firstItem() !=1 )
                 <a href="{{$quiz->QuestionPaginate()->previousPageUrl()}}" class="btn btn-success "> <strong>< </strong>Previous Question </a>
+                @else
+                <a href="{{$quiz->QuestionPaginate()->previousPageUrl()}}" class="btn btn-success disabled "> <strong>< </strong>Previous Question </a>
+                @endif
             </div>
             <div class=" col text-right"> 
+                @if( $quiz->QuestionPaginate()->lastPage()!= $quiz->QuestionPaginate()->firstItem() ) 
                 <a href="{{$quiz->QuestionPaginate()->nextPageUrl()}}" class="btn btn-success">Next Question <strong>></strong></a>
+                @else
+                <a href="{{$quiz->QuestionPaginate()->nextPageUrl()}}" class="btn btn-success disabled ">Next Question <strong>></strong></a>
+                @endif
             </div>
         </div>
         @foreach($quiz->QuestionPaginate() as $question)
         <div class="question-box">
-            <li><h3><span class="badge badge-success" id="">{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}} ID:{{$question->id}}</strong></h3>
+            <li><h3><span class="badge badge-success" id="">{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}} </strong></h3>
             </li>
             <br>
             <ul class="list-group row" >
                 @foreach($question->Answers() as $answer)
 
                 @if($question->UserAnswers($answer->id,$code))
-                <li class="list-group-item list-group-item-success" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}} ID:{{$answer->id}}</li>
+                <li class="list-group-item list-group-item-success" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}}</li>
 
                 @else   
-                <li class="list-group-item" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}} ID:{{$answer->id}}</li>
+                <li class="list-group-item" data-qid="{{$question->id}}" id="answer{{$answer->id}}">{{$answer->body}} </li>
 
                 @endif  
                 @endforeach
@@ -41,9 +53,12 @@
             </ul>
 
         </div>
+        @auth
         {{ Form::open(['method' => 'DELETE', 'route' => ['delquestion.delete', $question->id]]) }}
         {{Form::submit('Delete question',['class'=>'btn btn-danger '])}} 
         {{ Form::close() }}
+        @endauth
+        
         @endforeach
         <div class="container col-sm-4">
             {{ $quiz->QuestionPaginate()->links() }}
@@ -52,7 +67,7 @@
     </ul>
 
 
-
+@auth
 
     <div class=" col-sm-4">        
         <p><a href="/{{$quiz->name}}/CreateQuestion">Add question</a></p>
@@ -61,7 +76,7 @@
         <p><a href='/grade/{{$code}}'>Check results</a></p>
     </div>
 
-
+   @endauth
     <br>
 </div>
 
@@ -90,7 +105,7 @@
     var answerid = temp;
     var questionid = temp2;
     var quizcode = code;
-    console.log(answerid);
+   // console.log(answerid);
     //  console.log(window.location.href);
     var _token = $("input[name='_token']").val();
     $.ajax({
@@ -105,7 +120,7 @@
             //    console.log('merge');
             var element = document.getElementById('answer' + answerid);
             element.classList.remove('list-group-item-success');
-            console.log(data['grade']);
+         //   console.log(data['grade']);
             if (data['answer'] != 0) {
             element.classList.add('list-group-item-success');
             //   console.log('merge');
@@ -113,7 +128,7 @@
             //  console.log(data['userid']);
             }).fail(function($xhr){
     var data = $xhr.responseJSON;
-    console.log(data);
+    //console.log(data);
     });
     }
 </script>

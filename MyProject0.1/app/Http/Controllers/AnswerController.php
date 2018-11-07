@@ -8,6 +8,13 @@ use App\Quiz;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller {
+    
+                function __construct()
+    {
+        
+         $this->middleware('auth');
+        
+    }
 
     /**
      * Display a listing of the resource.

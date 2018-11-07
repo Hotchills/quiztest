@@ -18,11 +18,6 @@
 
 <!--Login Card-->
 
-
-    
-
-
-            
                 <div class="card center_login">
                     <div Style="text-align:center" class="card-header">{{ __('Test Login') }}</div>
 
@@ -68,9 +63,5 @@
                         </form>
                     </div>
                 </div>
-            
-ee
-
-
 
 @endsection

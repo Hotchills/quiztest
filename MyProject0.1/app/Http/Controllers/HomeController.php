@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-      //  $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['rootpage']]);
     }
 
     /**
@@ -27,5 +27,14 @@ class HomeController extends Controller
       $quizzes=Quiz::All();
 
          return view('home', compact('quizzes'));
+    }
+        public function rootpage()
+    {
+         return view('welcome');
+    }
+    
+            public function adminpage()
+    {
+         return view('admin');
     }
 }

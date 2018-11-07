@@ -8,6 +8,13 @@ use App\GuestUser;
 use Illuminate\Http\Request;
 
 class AssignedQuizController extends Controller {
+    
+                function __construct()
+    {
+        
+         $this->middleware('auth', ['except' => ['index','show']]);
+        
+    }
 
     /**
      * Display a listing of the resource.

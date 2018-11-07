@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class GuestUserController extends Controller {
+    
+    
+            function __construct()
+    {
+        
+         $this->middleware('auth');
+        
+    }
 
     public function index() {
         return view('CreateGuestUser');

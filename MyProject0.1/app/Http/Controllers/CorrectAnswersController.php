@@ -8,6 +8,13 @@ use App\Answer;
 use App\Question;
 
 class CorrectAnswersController extends Controller {
+    
+            function __construct()
+    {
+        
+         $this->middleware('auth');
+        
+    }
 
     /**
      * Display a listing of the resource.
@@ -39,7 +46,7 @@ class CorrectAnswersController extends Controller {
             $question->question_nr = 1;
         else
             $question->question_nr = $question->question_nr + 1;
-$question->save();
+        $question->save();
         $answer = Answer::where('id', $request->answerid)->first();
         $correctanswer = new CorrectAnswers();
         $correctanswer->question_id = $id;
@@ -88,14 +95,14 @@ $question->save();
      * @param  \App\CorrectAnswers  $correctAnswers
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $request) {
-        
-         $question = Question::where('id',$request->questionid)->first();
+    public function destroy($id, Request $request) {
+
+        $question = Question::where('id', $request->questionid)->first();
         if ($question->question_nr == NULL)
             $question->question_nr = 0;
         else
-            $question->question_nr = $question->question_nr-1;
-        
+            $question->question_nr = $question->question_nr - 1;
+
         $question->save();
         CorrectAnswers::destroy($id);
 
