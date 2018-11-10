@@ -60,10 +60,18 @@ class QuestionController extends Controller {
         $question->question_nr = $request->mode;
         $question->duplicate = 0;
         $question->quiz()->associate($quiz); // associate the question to the quiz
-        $question->save(); // save quiestion in DB
+        $question->save(); // save question in DB
   
         return redirect(route('addanswerstoquestion', ['question' => $question->id]));
     }
+        public function update(Request $request) {
+ 
+        if(Question::where('id',$request->questionID)->update(['body'=>$request->questionBODY]))
+  
+        return redirect()->back()->with('message', 'Question edited'); 
+        else          
+         return redirect()->back()->withErrors('Bad question ID');
+        }
 
     /**
      * Display the specified resource.

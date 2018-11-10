@@ -85,9 +85,14 @@ class AnswerController extends Controller {
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer) {
-        //
-    }
+        public function update(Request $request) {
+ 
+        if(Answer::where('id',$request->answerID)->update(['body'=>$request->answerBODY]))
+  
+        return redirect()->back()->with('message', 'Answer edited'); 
+        else          
+         return redirect()->back()->withErrors('Bad answer ID');
+        }
 
     /**
      * Remove the specified resource from storage.

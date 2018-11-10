@@ -11,9 +11,6 @@
 |
 */
 
-// Main Page
-
-
 
 
 Route::post('/AssignedQuiz', ['uses'=> 'AssignedQuizController@store','as'=>'assignedquiz.store' ]);
@@ -44,9 +41,13 @@ Route::get('/{main}','QuizController@geteditquiz');
 Route::get('/{code}/{main}','QuizController@startquiz');
 Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('addanswerstoquestion');
 
+//update 
 Route::put('/AddCorrectAnswersToQuestion/{id}', 'CorrectAnswersController@store')->name('correctanswer.store');
 Route::put('/Useranswer/{id}', 'UserAnswerController@update')->name('useranswer.update');
+Route::put('/UpdateQuestion', 'QuestionController@update')->name('question.update');
+Route::put('/UpdateAnswer', 'AnswerController@update')->name('answer.update');
 
+//delete
 Route::delete('/DelAnswersToQuestion/{id}', 'AnswerController@destroy')->name('delanswer.delete');
 Route::delete('/DelCorrectAnswersToQuestion/{id}', 'CorrectAnswersController@destroy')->name('delcorrectanswer.delete');
 Route::delete('/delquestion/{id}', 'QuestionController@destroy')->name('delquestion.delete');
