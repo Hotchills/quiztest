@@ -25,7 +25,7 @@
                         {{ Form::textarea('questionBODY',$question->body,['class'=>'form-control textarea','rows'=>'1'])}}
                         {{ Form::submit('Save',['class'=>'btn btn-warning'])}} 
 
-                        <a href="#" id="CancelEditQuestionButton{{$question->id}}" class="btn btn-primary" onclick="QuestionCancelEdit({{$question->id}})">Cancel</a>  
+                        <a  id="CancelEditQuestionButton{{$question->id}}" class="btn btn-primary" onclick="QuestionCancelEdit({{$question->id}})">Cancel</a>  
 
                         {{ Form::close() }}
                     </h3>     
@@ -42,7 +42,7 @@
                                 {{ Form::submit('Delete question',['class'=>'btn btn-danger btn-dropdown btn-fordropdown'])}} 
                                 {{ Form::close() }}</li>
                             <li> 
-                                <a href="#" id="EditQuestionButton{{$question->id}}" class="btn btn-primary btn-fordropdown" onclick="QuestionEdit({{$question->id}})">Edit</a>  
+                                <a  id="EditQuestionButton{{$question->id}}" class="btn btn-primary btn-fordropdown" onclick="QuestionEdit({{$question->id}})">Edit</a>  
                             </li>
 
                         </ul>
@@ -68,7 +68,7 @@
                             {{ Form::textarea('answerBODY',$answer->body,['class'=>'form-control textarea','rows'=>'1'])}}
                             {{ Form::submit('Save',['class'=>'btn btn-warning'])}} 
 
-                            <a href="#" class="btn btn-primary" onclick="AnswerCancelEdit({{$answer->id}})">Cancel</a>  
+                            <a class="btn btn-primary" onclick="AnswerCancelEdit({{$answer->id}})">Cancel</a>  
                             {{ Form::close() }}
 
                         </h4>
@@ -99,13 +99,13 @@
                             <button class="btn btn-info dropdown-toggle" type="button" id="menuanswer{{$answer->id}}" data-toggle="dropdown">
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="menuanswer{{$answer->id}}">
-                                <li role="presentation"><a role="menuitem" href="#">
+                                <li role="presentation"><a role="menuitem" >
                                         {{ Form::open(['method' => 'DELETE', 'route' => ['delanswer.delete', $answer->id]]) }}
                                         {{ Form::submit('Delete',['class'=>'btn btn-danger btn-fordropdown'])}} 
                                         {{ Form::close() }}
                                     </a>
                                 </li>
-                                <li role="presentation"><a role="menuitem" href="#"  id="EditAnswerButton{{$answer->id}}" class="btn btn-primary btn-fordropdown"  onclick="AnswerEdit({{$answer->id}})">Edit</a>
+                                <li role="presentation"><a role="menuitem"   id="EditAnswerButton{{$answer->id}}" class="btn btn-primary btn-fordropdown"  onclick="AnswerEdit({{$answer->id}})">Edit</a>
                                 </li>
                             </ul>
                         </div>
