@@ -2,69 +2,62 @@
 
 @section('content')
 
-
 <div class="quiz-box card">
     <div class="card-header">
-        <h1>Quiz ID: <strong>{{$quiz->id}} &nbsp </strong>Quiz Name: <strong> {{$quiz->name}}</strong></h1>
+        <h1></strong>Quiz Name: <strong> {{$quiz->name}}</strong></h1>
         <h2>{{$quiz->title}}</h2>
         <h4>CODE :  {{$code}} </h4>
     </div>
     <br>
-    <ul class="list-group container">
+    <ul class="list-group container" >
         @foreach($questions as $indexKey =>$question)
 
-        <li class="list-group-item list-group-item-success"><h2>{{$indexKey+1 }}.{{ $question->body }} / {{$question->question_nr}} :  </h2>
-        </li>  
+        <li class="list-group-item" Style="border:green 3px solid;border-radius:5px;" ><h2><span class="badge badge-success" >{{$indexKey+1 }}.</span> {{ $question->body }} :  </h2>
 
-        @foreach($question->answers() as $indexKey2 => $answer)  
-        <li class="list-group-item">
-            <div class="row" >
-                <div class="col-sm-7 col-md-7 col-xs-7" ><h4>
+            <ul class="list-group" >
+                @foreach($question->answers() as $indexKey2 => $answer) 
+                @if(!$answer->Getcorrectanswers())
 
-
-                        {{$indexKey2+1 }}. {{$answer->body }} 
-
-                        @if(!$answer->Getcorrectanswers())
-                        -
-                        @elseif($answer->Getcorrectanswers()->answer_id == $answer->id )
-                        &#10004
-                        @endif
-
-                    </h4>
-
-
-                </div>
-
-                <div class="col-sm-3 col-md-3 col-xs-3">
-@if(0)
-                    @if(!$answer->Getcorrectanswers())
-                    @if($question->CompareUserAnswer($answer->id, $code))
-                    <div Style='color: red;'>bad </div>             
-                    @endif   
-
+                <li class="list-group-item"Style="">
                     @elseif($answer->Getcorrectanswers()->answer_id == $answer->id )
-
-                    @if($question->CompareUserAnswer($answer->id, $code))
-                   <div Style='color: green;'> &#10004 good   </div>  
-                    @else
-                 <div Style='color: red;'> bad </div>  
-                    @endif   
+                <li class="list-group-item list-group-item-success">
                     @endif
-@endif
+                    <div class="row" >
+                        <div class="col-sm-10 col-md-10 col-xs-10">
 
-                </div>
-            </div>
+                            {{$indexKey2+1 }}. {{$answer->body }} 
 
-        </li>
-        @endforeach
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-xs-2">
+
+                            @if(!$answer->Getcorrectanswers())
+                            @if($question->CompareUserAnswer($answer->id, $code))
+                            <div Style="color: red;">x bad</div>             
+                            @endif   
+
+                            @elseif($answer->Getcorrectanswers()->answer_id == $answer->id )
+
+                            @if($question->CompareUserAnswer($answer->id, $code))
+                            <div Style="color: green;"> &#10004 good   </div>  
+                            @else
+                            <div Style="color: red;"> not selected</div>  
+                            @endif   
+                            @endif
+
+                        </div>
+                    </div>
+
+                </li>
+                @endforeach
+            </ul>
+        </li> 
         <br>
-
         @endforeach
 
     </ul>
 
     <div class="container">
-       <h1><strong> Grade : {{$quiz->getgrate($code)}}%</strong></h1>
+        <h1><strong> Grade : {{$quiz->getgrate($code)}}%</strong></h1>
     </div>
 
 </div>

@@ -23,7 +23,7 @@
                 <a href="{{$quiz->QuestionPaginate()->previousPageUrl()}}" class="btn btn-success disabled "> <strong>< </strong>Previous Question </a>
                 @endif
             </div>
-            <div class=" col text-right"> 
+            <div class="col text-right"> 
                 @if( $quiz->QuestionPaginate()->lastPage()!= $quiz->QuestionPaginate()->firstItem() ) 
                 <a href="{{$quiz->QuestionPaginate()->nextPageUrl()}}" class="btn btn-success">Next Question <strong>></strong></a>
                 @else
@@ -33,7 +33,7 @@
         </div>
         @foreach($quiz->QuestionPaginate() as $question)
         <div class="question-box">
-            <li><h3><span class="badge badge-success" id="">{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}} </strong></h3>
+            <li><h3><span class="badge badge-success" >{{$quiz->QuestionPaginate()->currentPage() }}.</span><strong>&nbsp {{$question->body}} </strong></h3>
             </li>
             <br>
             <ul class="list-group row" >
@@ -53,10 +53,10 @@
             </ul>
 
         </div>
-         @if( $quiz->QuestionPaginate()->lastPage()== $quiz->QuestionPaginate()->firstItem() )
+         @if( $quiz->QuestionPaginate()->lastPage() == $quiz->QuestionPaginate()->firstItem() )
        {{ Form::open(['method' => 'POST', 'route' => ['finishtest.update']]) }}
        {{ Form::hidden('code', $code) }}
-        {{Form::submit('Finish Test ',['class'=>'btn btn-danger '])}} 
+        {{ Form::submit('Finish Test ',['class'=>'btn btn-danger '])}} 
         {{ Form::close() }}
         @endif
         @auth

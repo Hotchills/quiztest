@@ -7,7 +7,7 @@
 <br>
 <ul class="list-group" >
 
-    @foreach($guestusers as $guestuser)
+    @foreach($guestusers as $indexKey =>$guestuser)
     <div class="row">
         <li class="list-group-item col-md-12 col-xs-12 col-sm-12">
             <h3>{{$guestuser->id}}. {{$guestuser->email}} </h3>
@@ -19,7 +19,7 @@
                     <p>Is assigned to : </p>
                     <ul class="list-group" >
                         @foreach($guestuser->assignedq() as $assigned)
-                        <li  class="list-group-item" ><strong> ID:</strong>{{ $assigned->quiz_id }}<strong> CODE: </strong>{{ $assigned->code }} @if($assigned->grade>0)<strong> Grade: </strong>{{ $assigned->grade }}%@endif</li>
+                        <li  class="list-group-item" ><strong>{{ $assigned->quiz->name }} (</strong> {{ $assigned->code }}<strong> )</strong> @if($assigned->grade>0)<strong> Grade: </strong>{{ $assigned->grade }}% -> <a href='/grade/{{$assigned->code}}'>Check results</a>@endif</li>
                         @endforeach                  
                     </ul>
 
@@ -50,7 +50,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>      
         </li>
     </div>
     <br>

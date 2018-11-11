@@ -13,11 +13,13 @@
         <title>{{ config('app.name', 'Godaddy DCOps') }}</title>
 
         <!-- Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-        
+
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -28,10 +30,10 @@
             }
             .dropdown-menu{
                 padding: 0px;
-                
+
             }
             .btn-fordropdown{
-                
+
                 width:100%;
                 border:0px;
                 border-radius:0px;
@@ -134,7 +136,7 @@
                 font-size: 16px;
                 border: none;
             }
-             .dropbtn2 {
+            .dropbtn2 {
                 background-color: #4CAF50;
                 color: white;
                 padding: 16px;
@@ -194,7 +196,7 @@
                             <!-- Authentication Links -->
 
                             @if(0)        <a  href="{{ route('login') }}"><strong>{{ __('Login') }}</strong></a>
-@endif
+                            @endif
                             @guest
 
                             @else
