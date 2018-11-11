@@ -51,9 +51,9 @@ class Question extends Model {
 
     public function CompareUserAnswer($temp, $code) {
 
-        if ($userid = AssignedQuiz::where('code', $code)->first())
-            if( $answer = UserAnswer::where("question_id", $this->id)->where('user_id', $userid->id)->where('body',$temp)->first())
-                 return true;
+        if ($user = AssignedQuiz::where('code', $code)->first())
+            if( $answer = UserAnswer::where("question_id", $this->id)->where('user_id', $user->guestuser_id)->where('body',$temp)->first())
+                 return $answer;
         return false;
     }
 

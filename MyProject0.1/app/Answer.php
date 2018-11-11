@@ -22,9 +22,10 @@ class Answer extends Model {
 
     public function Getcorrectanswers() {
 
-        $tmep2 = CorrectAnswers::where('answer_id', $this->id)->first();
-
-        return $tmep2;
+        if($tmep = CorrectAnswers::where('answer_id', $this->id)->first())
+        return $tmep;
+        else
+            false;
     }
 
 }

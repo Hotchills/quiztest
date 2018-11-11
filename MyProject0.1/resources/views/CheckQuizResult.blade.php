@@ -12,13 +12,13 @@
     <ul class="list-group container" >
         @foreach($questions as $indexKey =>$question)
 
-        <li class="list-group-item" Style="border:green 3px solid;border-radius:5px;" ><h2><span class="badge badge-success" >{{$indexKey+1 }}.</span> {{ $question->body }} :  </h2>
+        <li class="list-group-item" Style="border:green 3px solid;border-radius:5px;" ><h2><span class="badge badge-success" >{{$indexKey+1 }}.</span> {{ $question->body }} </h2>
 
             <ul class="list-group" >
                 @foreach($question->answers() as $indexKey2 => $answer) 
                 @if(!$answer->Getcorrectanswers())
 
-                <li class="list-group-item"Style="">
+                <li class="list-group-item">
                     @elseif($answer->Getcorrectanswers()->answer_id == $answer->id )
                 <li class="list-group-item list-group-item-success">
                     @endif
@@ -30,19 +30,18 @@
                         </div>
                         <div class="col-sm-2 col-md-2 col-xs-2">
 
-                            @if(!$answer->Getcorrectanswers())
+                        @if(!$answer->Getcorrectanswers())
                             @if($question->CompareUserAnswer($answer->id, $code))
-                            <div Style="color: red;">x bad</div>             
+                              <div Style="color: red;">x selected</div>             
                             @endif   
 
                             @elseif($answer->Getcorrectanswers()->answer_id == $answer->id )
-
-                            @if($question->CompareUserAnswer($answer->id, $code))
-                            <div Style="color: green;"> &#10004 good   </div>  
-                            @else
-                            <div Style="color: red;"> not selected</div>  
+                                @if($question->CompareUserAnswer($answer->id, $code))
+                                   <div Style="color: green;"> &#10004 correct</div>  
+                                @else
+                                  <div Style="color: red;">x not selected</div>  
                             @endif   
-                            @endif
+                        @endif
 
                         </div>
                     </div>
