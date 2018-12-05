@@ -15,7 +15,7 @@
     </div>
 
     <div class="card-body">
-        <h2>Available quizzes: </h2>
+        <h2>Available Questionnary: </h2>
         <ul class="list-group">
             @foreach($quizzes as $quiz)
             <div  class="list-group-item">
