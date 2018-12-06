@@ -14,8 +14,8 @@
 <div class="card-body">
 
 
-    <h2>Quiz type : <strong>{{$question->type}}</strong></h2>
-    <p>question body :<strong> {{$question->body}} </strong></p>
+    <h2>Question type : <strong>{{$question->type}}</strong></h2>
+    <p>Question body :<strong> {{$question->body}} </strong></p>
 
 
 </div>
