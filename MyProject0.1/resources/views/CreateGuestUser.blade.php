@@ -9,7 +9,7 @@
 
 {{Form::open(['route'=>'guestuser.store','method'=>'POST'])}}
 
-{{Form::label('email','Email')}}
+{{Form::label('email','Workday Number')}}
 {{Form::text('email','',['class'=>'form-control'])}}
 
 
