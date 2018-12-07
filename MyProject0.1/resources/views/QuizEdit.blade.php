@@ -18,7 +18,7 @@
                 <div class="col-sm-10 col-md-10 col-xs-10"> 
                     <h3 id="EditQuestionText{{$question->id}}" >
                         <span class="badge badge-success" id="">{{$indexKey+1}}.</span>
-                        &nbsp  {{$question->body}}  </h3> 
+                        &nbsp  {{$question->body}}  ($question->id)</h3> 
                     <h3 id="EditQuestionTextForm{{$question->id}}" Style="display:none;">
                         {{ Form::open(['method' => 'PUT', 'route' => ['question.update']]) }}
                         {{Form::hidden('questionID',$question->id)}}

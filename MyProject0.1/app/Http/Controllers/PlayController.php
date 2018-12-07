@@ -59,7 +59,7 @@ class PlayController extends Controller
         $play->question()->associate($question); 
         $play->save();
         
-       return redirect()->to('/ThisIsJustALink' . $question->id )->with('message', 'Saved');
+       return redirect()->to('/ThisIsJustALink/' . $question->id )->with('message', 'Saved');
       
     }
 
