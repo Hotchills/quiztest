@@ -10,14 +10,13 @@ use App\GuestUser;
 use App\AssignedQuiz;
 use App\CorrectAnswers;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class QuizController extends Controller {
-    
-            function __construct()
-    {
-        
-         $this->middleware('auth', ['except' => ['startquiz']]);
-        
+
+    function __construct() {
+
+        $this->middleware('auth', ['except' => ['startquiz', 'starttestpage']]);
     }
 
     /**
@@ -34,7 +33,32 @@ class QuizController extends Controller {
         //
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
-            return view('quiz', compact('quiz', 'questions', 'code'));
+            $assign = AssignedQuiz::where("code", $code)->first();
+            if ($assign->start_at == NULL) {
+                $assign->start_at = Carbon::now();
+                $assign->save();
+            }
+            $timeleft = Carbon::now()->diffInSeconds($assign->start_at);
+            //   $timeleft = gmdate("H:i:s", $timeleft);
+            //   $timeleft = $timeleft/60;
+            if ($timeleft / 60 > $assign->time || $assign->time == 0) {
+                return redirect()->to('/' . $code . '/FinishTest');
+            } else
+                return view('quiz', compact('quiz', 'questions', 'code', 'timeleft'));
+        }
+        abort(404);
+    }
+
+    public function starttestpage($code, $main) {
+
+        if ($quiz = Quiz::where('name', $main)->first()) {
+            $questions = $quiz->question;
+
+            $assign = AssignedQuiz::where("code", $code)->first();
+            if ($assign->time == 0) {
+                return redirect()->to('/' . $code . '/FinishTest');
+            }
+            return view('StartTestPage', compact('quiz', 'code'));
         }
         abort(404);
     }
@@ -63,7 +87,7 @@ class QuizController extends Controller {
 
             $quiz = Quiz::where('id', $tempcode->quiz_id)->first();
             $questions = Question::where('quiz_id', $tempcode->quiz_id)->get();
-            return view('CheckQuizResult', compact('quiz', 'questions','code'));
+            return view('CheckQuizResult', compact('quiz', 'questions', 'code'));
         }
         abort(404);
     }
@@ -100,8 +124,6 @@ class QuizController extends Controller {
     }
 
     public function destroy($id) {
-
-
 
         Quiz::destroy($id);
 

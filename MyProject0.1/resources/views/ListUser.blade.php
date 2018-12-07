@@ -17,11 +17,6 @@
                 <div class="col-md-8 col-xs-8 col-sm-8">
 
                     <p>Is assigned to : </p>
-                    <ul class="list-group" >
-                        @foreach($guestuser->assignedq() as $assigned)
-                        <li  class="list-group-item" ><strong>{{ $assigned->quiz->name }} (</strong> {{ $assigned->code }}<strong> )</strong> @if($assigned->grade>0)<strong> Grade: </strong>{{ $assigned->grade }}% -> <a href='/grade/{{$assigned->code}}'>Check results</a>@endif</li>
-                        @endforeach                  
-                    </ul>
 
                 </div>
                 <div class="col-md-4 col-xs-4 col-sm-4">
@@ -41,8 +36,6 @@
                             </div>
                             <div class="col-md-5 col-xs-5 col-sm-5">
                                 <input type="hidden" id="guestuserid" name="guestuserid" value="{{$guestuser->id}}">
-
-
                                 <button type="submit" class="btn btn-success">
                                     Assign
                                 </button>
@@ -50,7 +43,34 @@
                         </div>
                     </form>
                 </div>
-            </div>      
+            </div> 
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <ul class="list-group" >
+                        @foreach($guestuser->assignedq() as $assigned)
+                        <li  class="list-group-item " >
+                            <div class="row">
+                                <div class="col-md-8 col-xs-8 col-sm-8">
+                                    <strong>{{ $assigned->quiz->name }} (</strong> {{ $assigned->code }}<strong> )</strong> @if($assigned->grade>0)<strong> Grade: </strong>{{ $assigned->grade }}% -> <a href='/grade/{{$assigned->code}}'>Check results</a>@endif
+                                    Time: <strong>{{$assigned->time}}</strong> min 
+                                </div>
+                                <div class="col-md-4 col-xs-4 col-sm-4">
+                                    <form action='/UpdateTime' method="POST" >
+                                        {{ csrf_field() }}
+                                       
+                                        <input type="text" id="time" name="time" maxlength="6" size="6" value="{{$assigned->time}} min">
+                                        <input type="hidden" id="code" name="code" value="{{$assigned->code}}" >
+                                        <button type="submit" class="btn btn-info">
+                                            Save
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                        @endforeach                  
+                    </ul>
+                </div>
+            </div>
         </li>
     </div>
     <br>

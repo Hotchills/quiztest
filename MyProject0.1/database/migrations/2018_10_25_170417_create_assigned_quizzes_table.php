@@ -19,10 +19,9 @@ class CreateAssignedQuizzesTable extends Migration {
             $table->string('code');
             $table->string('grade');
             $table->string('time');
-            $table->date('start_at');
+            $table->timestamp('start_at')->nullable();
             $table->timestamps();
         });
-
 
         Schema::table('assigned_quizzes', function (Blueprint $table) {
             $table->foreign('guestuser_id')->references('id')->on('guest_users')->onDelete('cascade');

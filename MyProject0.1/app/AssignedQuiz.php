@@ -11,6 +11,7 @@ class AssignedQuiz extends Model {
     protected $fillable = [
         'code', 'grade', 'time',
     ];
+    protected $dates = ['start_at'];
 
     public function quiz() {
         return $this->belongsTo('App\Quiz', 'quiz_id', 'id');

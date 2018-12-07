@@ -11,6 +11,9 @@
         <p>Debug info quizID: <strong>{{$quiz->id}}</strong></p> 
         @endauth
         <h1>{{$quiz->title}}</h1>
+
+        <h1>{{gmdate("H:i:s", $timeleft)}}</h1>
+       
     </div>
 
     <ul class="card-body" Style="list-style: none;">
@@ -54,8 +57,8 @@
 
         </div>
          @if( $quiz->QuestionPaginate()->lastPage() == $quiz->QuestionPaginate()->firstItem() )
-       {{ Form::open(['method' => 'POST', 'route' => ['finishtest.update']]) }}
-       {{ Form::hidden('code', $code) }}
+       {{ Form::open(['method' => 'POST', 'route' => ['finishtest.update',$code]]) }}
+       {{ Form::hidden('closetest', 1) }}
         {{ Form::submit('Finish Test ',['class'=>'btn btn-danger '])}} 
         {{ Form::close() }}
         @endif
@@ -88,6 +91,13 @@
 
 
 <script>
+    var timeleft = {{$timeleft/60}};
+var downloadTimer = setInterval(function(){
+  document.getElementById("progressBar").value = {{$timeleft/60}} - --timeleft;
+  if(timeleft <= 0)
+    clearInterval(downloadTimer);
+},1000);
+    
     function makenewquestion() {
 
     window.location = '/' + {{$quiz->name}} + '/CreateQuestion';
@@ -123,6 +133,10 @@
             data: { _token:_token, answerid: answerid, questionid: questionid, quizcode:quizcode}
     })
             .done(function (data) {
+                if(data['answer'] == 'fail'){
+                     location.reload();
+                }
+            
             //    console.log('merge');
             var element = document.getElementById('answer' + answerid);
             element.classList.remove('list-group-item-success');
@@ -133,6 +147,7 @@
             }
             //  console.log(data['userid']);
             }).fail(function($xhr){
+               
     var data = $xhr.responseJSON;
     //console.log(data);
     });

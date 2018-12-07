@@ -11,6 +11,7 @@ use App\GuestUser;
 use App\AssignedQuiz;
 use App\CorrectAnswers;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class UserAnswerController extends Controller {
 
@@ -138,6 +139,8 @@ class UserAnswerController extends Controller {
         $quizcode = $request->quizcode;
 
         if ($useridtemp = AssignedQuiz::where('code', $quizcode)->first()) {
+             $timeleft = Carbon::now()->diffInSeconds($useridtemp->start_at);
+            if($timeleft / 60 < $useridtemp->time && $useridtemp->time != 0){
 
             $userid = $useridtemp->guestuser_id;
             // return response()->json(['status' => $userid], 201);
@@ -151,7 +154,6 @@ class UserAnswerController extends Controller {
                 $tempUser->body = $answerid;
                 $tempUser->save();
             } else {
-
                 $tempUser = new UserAnswer;
                 $tempUser->body = $answerid;
                 $tempUser->question_id = $questionid;
@@ -167,13 +169,11 @@ class UserAnswerController extends Controller {
             $question = Question::where('quiz_id', $useridtemp->quiz_id)->get();
             $totalq = $question->count();
             $gradearray = [];
-
             for ($i = 0; $i < $totalq; $i++) {
                 $totalans = 0;
                 $tempgrade = 0;
                 $answer = Answer::where('question_id', $question[$i]->id)->get();
                 $totalans = $answer->count();
-
                 for ($j = 0; $j < $totalans; $j++) {
                     if ($array = CorrectAnswers::where('answer_id', $answer[$j]->id)->get()->count() > 0) {
                         if ($array2 = UserAnswer::where('question_id', $question[$i]->id)->where('user_id', $userid)->where('body', $answer[$j]->id)->get()->count()) {
@@ -188,7 +188,6 @@ class UserAnswerController extends Controller {
                         $j = $totalans;
                     }
                 }
-
                 $gradearray[$i] = $tempgrade;
             }
             // return response()->json([ 'grade' => $gradearray]);
@@ -202,10 +201,10 @@ class UserAnswerController extends Controller {
             $useridtemp->save();
 
             return response()->json(['answer' => $tempUser->body, 'questionid' => $questionid, 'userid' => $userid, 'grade' => $useridtemp->grade]);
-        } else
+            }
+            } 
 
-        // return response()->json(['message' => 'error']);
-            return response()->json(['status' => 'fail'], 201);
+            return response()->json(['answer' => 'fail'], 201);
     }
 
     /**

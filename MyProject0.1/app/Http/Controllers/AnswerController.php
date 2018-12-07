@@ -102,7 +102,6 @@ class AnswerController extends Controller {
      */
     public function destroy($id) {
         $answer = Answer::where('id', $id)->first();
-
         $question = Question::where('id', $answer->question_id)->first();
         $question->question_nr = 0;
         $question->save();
@@ -111,5 +110,6 @@ class AnswerController extends Controller {
 
         return redirect()->back()->with('message', 'Answer del');
     }
+
 
 }

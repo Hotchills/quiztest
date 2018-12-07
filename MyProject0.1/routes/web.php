@@ -21,7 +21,8 @@ Route::post('/CreateQuestion', ['uses'=> 'QuestionController@store','as'=>'quest
 Route::post('/AddUserAnswer', ['uses'=> 'UserAnswerController@store','as'=>'useranswer.store' ]);
 Route::post('/addajaxanswer' , 'UserAnswerController@addajaxanswer');
 Route::post('/LoginUser', ['uses'=> 'AssignedQuizController@show','as'=>'loginguestuser.show' ]);
-Route::post('/FinishTest', ['uses'=> 'AssignedQuizController@finishtest','as'=>'finishtest.update' ]);
+Route::post('/{code}/FinishTest', ['uses'=> 'AssignedQuizController@finishtest','as'=>'finishtest.update' ]);
+Route::post('/UpdateTime', 'AssignedQuizController@updatetime');
 
 Auth::routes();
 
@@ -37,9 +38,12 @@ Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
 Route::get('/CreateGuestUser', 'GuestUserController@index')->name('CreateGuestUser');
 Route::get('/ListUser', 'GuestUserController@showusers')->name('ListGuestUser');
 Route::get('/{main}/CreateQuestion', 'QuestionController@index')->name('CreateQuestion');
+Route::get('/{code}/FinishTest', 'AssignedQuizController@finishtest');
 Route::get('/{main}','QuizController@geteditquiz');
+Route::get('/{code}/{main}/StartTestPage','QuizController@starttestpage')->name('StartTestPage');
 Route::get('/{code}/{main}','QuizController@startquiz');
 Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('addanswerstoquestion');
+
 
 //update 
 Route::put('/AddCorrectAnswersToQuestion/{id}', 'CorrectAnswersController@store')->name('correctanswer.store');
