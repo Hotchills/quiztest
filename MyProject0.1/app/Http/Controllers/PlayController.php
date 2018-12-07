@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class PlayController extends Controller
 {
+        function __construct() {
+        $this->middleware('auth', ['except' => ['index', 'saveplay']]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
