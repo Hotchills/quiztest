@@ -50,7 +50,7 @@ class PlayController extends Controller
         //       
      $validatedData = $request->validate([   
             'name' => 'required|max:60|min:3',
-            'body' => 'max:500',
+            'body' => 'max:5000',
         ]);
 
         $question = Question::where('id',$request->questionid)->first();
