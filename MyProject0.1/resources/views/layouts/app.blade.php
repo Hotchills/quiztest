@@ -177,7 +177,7 @@
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel"Style="background:#00a63f;box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);">
                 <div class="container">
                     <a href="{{ url('/') }}"> <button  Style ="padding:0px;border:0px;"class="navbar-brand btn btn-success" >              
-                            <img  src="/images/Mainpage/logo-smal.jpg" height="50px"/>
+                            <img  src="/images/Mainpage/logo-smal.png" height="50px"/>
                         </button > </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
