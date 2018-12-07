@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//extra 
+Route::get('/ThisIsJustALink/{question_id}','PlayController@index');
+Route::get('/ThisIsJustALinkForResults/{question_id}','PlayController@resultsplay');
+Route::post('/SavePlay',['uses' => 'PlayController@saveplay','as'=>'play.save' ]);
 
 
 Route::post('/AssignedQuiz', ['uses'=> 'AssignedQuizController@store','as'=>'assignedquiz.store' ]);
@@ -56,3 +59,5 @@ Route::delete('/DelAnswersToQuestion/{id}', 'AnswerController@destroy')->name('d
 Route::delete('/DelCorrectAnswersToQuestion/{id}', 'CorrectAnswersController@destroy')->name('delcorrectanswer.delete');
 Route::delete('/delquestion/{id}', 'QuestionController@destroy')->name('delquestion.delete');
 Route::delete('/delquiz/{id}', 'QuizController@destroy')->name('delquiz.delete');
+
+

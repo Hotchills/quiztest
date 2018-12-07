@@ -22,6 +22,9 @@ class Question extends Model {
     public function answer() {
         return $this->hasMany('App\Answer');
     }
+     public function play() {
+        return $this->hasMany('App\Play');
+    }
 
     public function correctanswers() {
         return $this->hasMany('App\CorrectAnswers');
