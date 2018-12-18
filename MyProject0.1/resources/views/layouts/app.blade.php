@@ -208,7 +208,7 @@
                                     <a class="dropdown-item" href="/home" >Home</a>
                                     <a class="dropdown-item" href="/CreateGuestUser" >Create User</a>
                                     <a class="dropdown-item" href="/LoginUser" >Login Page with code</a>
-                                    <a class="dropdown-item" href="/ListUser"  >Assign User to Quiz</a>
+                                    <a class="dropdown-item" href="/{{Auth::user()->location}}/ListUser"  >Assign User to Quiz</a>
                                     <a class="dropdown-item" href="/CreateQuiz" >Create quiz</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">

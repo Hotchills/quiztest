@@ -3,7 +3,20 @@
 @section('content')
 
 
-<h2>List of Users :</h2>
+<br>
+<h2>
+    List of Users from    <div class="dropdown">
+    <a class="dropdown-toggle btn btn-lg btn-success" thref="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><strong>{{$location}}</strong>
+    <span class="caret"></span></a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/SXB/ListUser" >SXB</a>
+      <a class="dropdown-item" href="/FRA/ListUser" >FRA</a>
+      <a class="dropdown-item" href="/STL/ListUser" >STL</a>
+      <a class="dropdown-item" href="/Leeds/ListUser" >Leeds</a>
+      <a class="dropdown-item" href="/AMS/ListUser" >AMS</a>
+    </div>
+  </div> :
+</h2>
 <br>
 <ul class="list-group" >
 
