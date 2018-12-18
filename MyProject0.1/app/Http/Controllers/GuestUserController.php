@@ -23,6 +23,14 @@ class GuestUserController extends Controller {
     
     public function showusers($location) {
         //
+        if($location == "ALL"){
+                  if ($guestusers = GuestUser::all() ) {
+          if ( $quizzes = Quiz::all()) {
+            return view('ListUser', compact('guestusers','quizzes','location'));
+          }
+        }  
+            
+        }
         
         if ($guestusers = GuestUser::where('info1',$location)->get() ) {
           if ( $quizzes = Quiz::all()) {
