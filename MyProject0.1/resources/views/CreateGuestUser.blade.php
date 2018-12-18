@@ -3,7 +3,7 @@
 @section('content')
 
 
-
+<div class="container">
 
 <h2>Add new User </h2>
 
@@ -19,7 +19,7 @@
 {{ Form::close() }}
 
 <br>
-<a href="/ListUser">ListGuestUsers</a>
+<a href="/home">Home</a>
 
-
+</div>
 @endsection
