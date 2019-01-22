@@ -3,19 +3,20 @@
 @section('content')
 
 
-<div class="card-header">
+<div class="card-header"Style='border:0.5px grey solid;'>
     <h1>Name: <strong> {{$quiz->name}}</strong></h1>
     <h1>{{$quiz->title}}</h1>
     <p>Debug info quizID: <strong>{{$quiz->id}}</strong></p> 
 </div>
 
 
-<ul class="card-body" Style="list-style: none;border:0.5px green solid;">
-    <div class="list-group">
+<ul class="card-body " Style="list-style: none;border:0.5px grey solid;padding:0px;">
+    <div class="list-group " >
         @foreach($questions as $indexKey=> $question)
-        <div  class="list-group-item list-group-item-success">
+        <div class="" Style="padding:5px;margin:10px;">
+        <div  class="list-group-item list-group-item-success ">
             <li class="row">
-                <div class="col-sm-10 col-md-10 col-xs-10"> 
+                <div class="col-sm-10 col-md-10 col-xs-10 "> 
                     <h3 id="EditQuestionText{{$question->id}}" >
                         <span class="badge badge-success" id="">{{$indexKey+1}}.</span>
                         &nbsp  {{$question->body}}</h3> 
@@ -34,7 +35,7 @@
                 <div class="col-sm-1 col-md-1 col-xs-1"> 
                     <div class="dropdown">
                         <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Options
-                            <span class="caret"></span></button>
+                            </button>
                         <ul class="dropdown-menu" >
                             <li>   <a href="{{route('addanswerstoquestion', ['question' => $question->id])}}" class="btn btn-success " Style="width:100%;border:0px;border-radius:0px;">Add answer</a>
                             </li>
@@ -52,7 +53,7 @@
 
         </div> 
 
-        <ul class="list-group" >
+        <ul class="list-group " >
 
             @foreach($question->Answers() as $indexKey2=>$answer)
             <div  class="list-group-item">
@@ -97,16 +98,17 @@
                     <div  class="col-sm-1 col-md-1 col-xs-1 btn-sm">
                         <div class="dropdown">
                             <button class="btn btn-info dropdown-toggle" type="button" id="menuanswer{{$answer->id}}" data-toggle="dropdown">
-                                <span class="caret"></span></button>
+                               </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="menuanswer{{$answer->id}}">
-                                <li role="presentation"><a role="menuitem" >
+                              <li role="presentation"><a role="menuitem"   id="EditAnswerButton{{$answer->id}}" class="btn btn-primary btn-fordropdown"  onclick="AnswerEdit({{$answer->id}})">Edit</a>
+                                </li>
+                                <li role="presentation">
                                         {{ Form::open(['method' => 'DELETE', 'route' => ['delanswer.delete', $answer->id]]) }}
-                                        {{ Form::submit('Delete',['class'=>'btn btn-danger btn-fordropdown'])}} 
+                                        {{ Form::submit('Delete answer',['class'=>'btn btn-danger btn-dropdown btn-fordropdown'])}} 
                                         {{ Form::close() }}
-                                    </a>
+                                    
                                 </li>
-                                <li role="presentation"><a role="menuitem"   id="EditAnswerButton{{$answer->id}}" class="btn btn-primary btn-fordropdown"  onclick="AnswerEdit({{$answer->id}})">Edit</a>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -116,14 +118,15 @@
             </div>
             @endforeach
         </ul>
-
-        <br>
+</div>
+    
         @endforeach
-    </div>  
-
-    <div class=" col-sm-4">        
+            <div class=" col-sm-4">        
         <p><a  class="btn btn-success" href="/{{$quiz->name}}/CreateQuestion">Add new question</a></p>
     </div>
+    </div>  
+
+
 </ul>
 
 <script>

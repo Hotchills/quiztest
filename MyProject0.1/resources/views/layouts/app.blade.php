@@ -11,17 +11,17 @@
 
 
         <title>{{ config('app.name', 'Godaddy DCOps') }}</title>
-
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
+       <!--  <script src="{{ asset('js/app.js') }}" defer></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
         <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+      
 
 
         <style>
@@ -168,27 +168,33 @@
 
             .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+            .container{
+                
+                background:#F0F0F0;
+                border:0.5px solid #DCDCDC;
+                padding: 2%;
+                 border-radius: 12px;
+            }
             /*end*/
 
         </style>
     </head>
     <body >
         <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel"Style="background:#00a63f;box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);">
-                <div class="container">
-                    <a href="{{ url('/') }}"> <button  Style ="padding:0px;border:0px;"class="navbar-brand btn btn-success" >              
-                            <img  src="/images/Mainpage/logo-smal.png" height="50px"/>
-                        </button > </a>
+            <nav class="navbar navbar-expand-md navbar-light navbar-laravel"Style="padding-left:15%;padding-right:15%;background:#00a63f;box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);">
+             
+                    <a href="{{ url('/') }}">     <img  src="/images/Mainpage/logo-smal.png" height="50px"/>
+                         </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
+                        <ul class="navbar-nav mr-auto navbar-left">
                         </ul>
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav ml-auto navbar-right">
                             <!-- Authentication Links -->
 
                             @if(0)  
@@ -200,8 +206,8 @@
                             @else
                             <!-- menu for logged in users -->
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle btn btn-success" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <strong>{{ ucfirst(Auth::user()->name) }} <span class="caret"></span> </strong>
+                                <a Style='padding-left: 18px;padding-right: 18px;' id="navbarDropdown" class="nav-link dropdown-toggle btn btn-default" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <strong>{{ ucfirst(Auth::user()->name) }} </strong>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
@@ -221,7 +227,7 @@
                             </li>
                             @endguest
                         </ul>
-                    </div>
+                   
             </nav>
 
             <main class="py-4">

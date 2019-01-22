@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="card">
+<div class="card ">
     <div class="card-header">Dashboard</div>
 
     <div class="card-body">
@@ -14,11 +14,12 @@
 
     </div>
 
-    <div class="card-body">
+    <div class="card-body ">
         <h2>Available Questionnary: </h2>
-        <ul class="list-group">
+        <ul class="list-group ">
             @foreach($quizzes as $quiz)
-            <div  class="list-group-item">
+            <br>
+            <div  class="list-group-item container">
                 <li class="row"> 
 
                     <div class="col-sm-9 col-md-9 col-xs-9">
@@ -44,9 +45,7 @@
         </ul>
     </div>
 
-    <div class="container">
 
-    </div>
 </div>
 
 <script>

@@ -41,6 +41,7 @@ class QuizController extends Controller {
             $timeleft = Carbon::now()->diffInSeconds($assign->start_at);
             //   $timeleft = gmdate("H:i:s", $timeleft);
             //   $timeleft = $timeleft/60;
+            
             if ($timeleft / 60 > $assign->time || $assign->time == 0) {
                 return redirect()->to('/' . $code . '/FinishTest');
             } else
@@ -110,12 +111,11 @@ class QuizController extends Controller {
     public function store(Request $request) {
         $validatedData = $request->validate([
             'title' => 'required|unique:quizzes|max:100|min:3',
-            'name' => 'required|unique:quizzes|max:40|min:3',
+            'name' => 'required|alpha_num|unique:quizzes|max:40|min:3',
             'body' => 'max:500',
         ]);
-
-        $quiz = new Quiz();
-        $quiz->name = $request->name;
+     $quiz = new Quiz();
+        $quiz->name = preg_replace('/[\x00-\x1F\x7F\xA0]/u', '', $request->name);
         $quiz->title = $request->title;
         $quiz->body = $request->body;
         $quiz->save();
