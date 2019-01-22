@@ -57,7 +57,7 @@ class AssignedQuizController extends Controller {
         $assign->guestuser_id = $request->guestuserid;
         $assign->code = str_random(15);
         $assign->grade = 0;
-        $assign->time = 30;
+        $assign->time = 0;
         // $assign->assigned_at = date('Y-m-d');
         // $assign->start_at = date('Y-m-d H:i:s');
         $quiz = Quiz::where('id', $assign->quiz_id)->first();
