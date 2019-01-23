@@ -43,8 +43,8 @@ class QuizController extends Controller {
             //   $timeleft = gmdate("H:i:s", $timeleft);
             //   $timeleft = $timeleft/60;
             
-            
-            if (($timeleft > ($assign->time*60)) ) {
+             return redirect()->back()->with('message', $timeleft);
+            if ($timeleft / 60 > $assign->time || $assign->time == 0) {
                 return redirect()->to('/' . $code . '/FinishTest');
             } else
                 return view('quiz', compact('quiz', 'questions', 'code', 'timeleft'));
