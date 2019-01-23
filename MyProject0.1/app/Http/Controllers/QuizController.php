@@ -39,7 +39,7 @@ class QuizController extends Controller {
                 $assign->start_at = Carbon::now();
                 $assign->save();
             }
-            $timeleft = Carbon::now()->diffInSeconds($assign->start_at) + 1;
+            $timeleft = Carbon::now()->diffInSeconds($assign->start_at);
             //   $timeleft = gmdate("H:i:s", $timeleft);
             //   $timeleft = $timeleft/60;
             
