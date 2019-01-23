@@ -85,7 +85,6 @@
         </div>
     </ul>
 
-
     @auth
 
     <div class=" col-sm-4">        

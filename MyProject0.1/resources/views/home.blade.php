@@ -19,8 +19,8 @@
         <ul class="list-group ">
             @foreach($quizzes as $quiz)
             <br>
-            <div  class="list-group-item container">
-                <li class="row"> 
+            <div  class="list-group-item "Style="background: #F0F0F0;border:0.5px solid #DCDCDC; border-radius: 12px;">
+                <li class="row "> 
 
                     <div class="col-sm-9 col-md-9 col-xs-9">
                         <h2><a href="/{{$quiz->name}}">{{$quiz->title}}</a></h2>

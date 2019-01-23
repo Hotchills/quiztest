@@ -49,6 +49,7 @@
             }
 
             .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 position: relative;
                 height: 100%;
                 width: 100%;
@@ -57,24 +58,19 @@
                 -webkit-transition: all 600ms;
                 transition: all 600ms;
                 z-index: 20;
-
+                background: #02C54C;
             }
 
             .card div {
                 position: absolute;
                 height: 100%;
                 width: 100%;
-                background: #02C54C;
                 text-align: center;
-
                 -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
-
             }
 
             .card .theback {
-
-
                 -webkit-transform: rotateX(180deg);
                 transform: rotateX(180deg);
             }
@@ -82,7 +78,7 @@
             label:hover .card {
                 -webkit-transform: rotateX(20deg);
                 transform: rotateX(20deg);
-                box-shadow: 0 20px 20px rgba(50,50,50,.2);
+                box-shadow: 2px 6px 16px 0 rgba(0, 0, 0, 0.3), 2px 12px 24px 0 rgba(0, 0, 0, 0.2);
             }
 
             input {
@@ -97,14 +93,12 @@
             label:hover :checked + .card {
                 transform: rotateX(180deg);
                 -webkit-transform: rotateX(180deg);
-                box-shadow: 0 20px 20px rgba(255,255,255,.2);
             }
             .center_login {
 
                 margin: auto;
                 width: 50%;
                 top: 20%;
-
             }
 
         </style>
@@ -112,22 +106,21 @@
 
     <body>
         <label>
-            <input type="checkbox"  />
-            <div class="card" Style="border : 2px solid #02C54C;" >
+            <input type="radio"  />
+            <div class="card" >
                 <div class="thefront"><img src="images/Mainpage/logo-flip.png"></div>
                 <div class="theback" >               
-                    <div class="center_login" >
+                    <div class="center_login container" >
 
                         {{Form::open(['route'=>'loginguestuser.show','method'=>'POST'])}}
                         {{Form::label('code','Insert Code:')}}
                         <br>
                         {{Form::text('code','',['class'=>'form-control'])}}
-
+                        <br>
                         <div class="center_login" >
-                            {{Form::submit('Start Test',['class'=>'btn btn btn-warning'])}}
+                            {{Form::submit('Start Test',['class'=>'btn btn-warning'])}}
                         </div>
                         {{ Form::close() }}
-
                     </div>
                 </div>
         </label>
