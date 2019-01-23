@@ -39,11 +39,11 @@ class QuizController extends Controller {
                 $assign->start_at = Carbon::now();
                 $assign->save();
             }
-            $timeleft = Carbon::now();//->diffInSeconds($assign->start_at);
+            $timeleft = Carbon::now()->diffInSeconds($assign->start_at);
             //   $timeleft = gmdate("H:i:s", $timeleft);
             //   $timeleft = $timeleft/60;
-          //  if($timeleft==86399)
-           //     $timeleft=1;
+            //if($timeleft==86399)
+            //    $timeleft=1;
             
              return redirect()->back()->with('message', $timeleft);
             if ($timeleft / 60 > $assign->time || $assign->time == 0) {
