@@ -45,7 +45,7 @@ class QuizController extends Controller {
             if($timeleft==86399)
                 $timeleft=1;
             
-             return redirect()->back()->with('message', $timeleft);
+           //  return redirect()->back()->with('message', $timeleft);
             if ($timeleft / 60 > $assign->time || $assign->time == 0) {
                 return redirect()->to('/' . $code . '/FinishTest');
             } else
