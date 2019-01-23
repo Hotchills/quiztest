@@ -34,13 +34,15 @@ class QuizController extends Controller {
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
             $assign = AssignedQuiz::where("code", $code)->first();
+            
             if ($assign->start_at == NULL) {
                 $assign->start_at = Carbon::now();
                 $assign->save();
             }
-            $timeleft = Carbon::now()->diffInSeconds($assign->start_at);
+            $timeleft = Carbon::now()->diffInSeconds($assign->start_at) + 1;
             //   $timeleft = gmdate("H:i:s", $timeleft);
             //   $timeleft = $timeleft/60;
+            
             
             if ($timeleft / 60 > $assign->time || $assign->time == 0) {
                 return redirect()->to('/' . $code . '/FinishTest');
