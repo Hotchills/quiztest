@@ -179,7 +179,7 @@
 
         </style>
     </head>
-    <body >
+    <body>
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel"Style="padding-left:15%;padding-right:15%;background:#00a63f;box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);">
              
