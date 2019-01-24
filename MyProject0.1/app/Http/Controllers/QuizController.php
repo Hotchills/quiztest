@@ -32,13 +32,7 @@ class QuizController extends Controller {
 
     public function startquiz($code, $main) {
         //        
-           if ($code == 'Thisisademocode' && $main = 'demotest') {
-            $assign = AssignedQuiz::where("code", $code)->first();
-            $assign->start_at = NULL;
-            $assign->time=30;
-            $assign->save();
-           
-        }
+
 
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
