@@ -85,6 +85,7 @@
         </div>
     </ul>
 
+
     @auth
 
     <div class=" col-sm-4">        
@@ -134,7 +135,7 @@ var interval_id=0;
       }
     $(window).focus(function() {
        // console.log("focus");
-      //  console.log(interval_id);
+        console.log(interval_id);
         clearInterval(interval_id);
         interval_id=0;
         el.innerText = "Please click back on this page in 30 sec or the test will close.";
@@ -151,7 +152,7 @@ $(window).blur(function() {
     interval_id = 0;   
     interval_id = setInterval(blurpage, 1000);
    // console.log("blur");
-   //   console.log(interval_id);
+      console.log(interval_id);
       document.getElementById("blur").style.display  = "block";
    //  document.getElementById("div1").style.opacity = "0.7";
      document.getElementById("popmes").style.display = "block";
@@ -185,7 +186,8 @@ window.onload = function () {
       window.location = '/' + {{$quiz->name}} + '/CreateQuestion';
     }
 
-    $(document).ready(function () {
+    $(document).ready(function (e) {
+       
         $('.list-group-item').click(function () {
         var element = document.getElementById($(this).attr('id'));
         var answerid = Number($(this).attr('id').slice(6));
@@ -197,6 +199,7 @@ window.onload = function () {
     });
     
     function addanswer(temp, temp2, code) {
+       
         var answerid = temp;
         var questionid = temp2;
         var quizcode = code;
@@ -230,6 +233,7 @@ window.onload = function () {
         //console.log(data);
         });
         }
+     
 </script>
 
 @endsection

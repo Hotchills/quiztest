@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PlayController extends Controller
 {
         function __construct() {
-        $this->middleware('auth', ['except' => ['index', 'saveplay']]);
+        $this->middleware('auth', ['except' => ['index', 'saveplay','demo']]);
     }
     
     /**
@@ -22,6 +22,14 @@ class PlayController extends Controller
         $question = Question::where('id',$question_id)->first();
         //return view('/CreateQuestion', compact('quiztempid', 'quizname'));
         return view('/QuestionPlay',compact('question'));
+        
+       
+    }
+        public function demo()
+    {
+       // $question = Question::where('id',$question_id)->first();
+        //return view('/CreateQuestion', compact('quiztempid', 'quizname'));
+        return view('/DemoPage');
         
        
     }

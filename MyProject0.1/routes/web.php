@@ -14,7 +14,8 @@
 Route::get('/ThisIsJustALink/{question_id}','PlayController@index');
 Route::get('/ThisIsJustALinkForResults/{question_id}','PlayController@resultsplay');
 Route::post('/SavePlay',['uses' => 'PlayController@saveplay','as'=>'play.save' ]);
-
+//demo
+Route::get('/Demo','PlayController@demo');
 
 Route::post('/AssignedQuiz', ['uses'=> 'AssignedQuizController@store','as'=>'assignedquiz.store' ]);
 Route::post('/CreateQuiz', ['uses'=> 'QuizController@store','as'=>'quiz.store' ]);

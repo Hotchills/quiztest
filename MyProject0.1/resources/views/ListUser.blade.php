@@ -23,14 +23,11 @@
     @foreach($guestusers as $indexKey =>$guestuser)
     <div class="row">
         <li class=" list-group-item col-md-12 col-xs-12 col-sm-12 container">
-            <h3>{{$guestuser->id}}. {{$guestuser->email}} </h3>
+            <h3>{{$indexKey + 1}}. {{$guestuser->email}} </h3>
 
             <div class="row">
-
                 <div class="col-md-8 col-xs-8 col-sm-8">
-
                     <p>Is assigned to : </p>
-
                 </div>
                 <div class="col-md-4 col-xs-4 col-sm-4">
 
@@ -88,7 +85,6 @@
     </div>
     <br>
     @endforeach
-
 </ul>
 
 <h2>Test list :</h2>
