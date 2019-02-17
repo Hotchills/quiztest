@@ -13,21 +13,21 @@
     <li><a data-toggle="tab" href="#menu5">Page 6</a></li>
     <li><a data-toggle="tab" href="#menu6">Page 7</a></li>
 </ul>
-
+<br>
 
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active container">
         <ul >
             <li><h2 >Page 1</h2>
-                <h4>First step is creating a new test. If you already have a test and just want to assign it to a user skip to Page5</h4>
+                <h4>The first step is creating a new test. If you already have a test and just want to assign it to a user skip to Page5</h4>
 
 
             </li>
             <li><h2 >Page 2</h2>
-                <h4>Second step is adding new questions to the test. </h4>
+                <h4>The second step is adding new questions to the test. </h4>
             </li>
             <li><h2 >Page 3</h2>
-                <h4>Third step is adding answers to the questions and selecting the correct answers. </h4>
+                <h4>The third step is adding answers to the questions and selecting the correct answers. </h4>
             </li>
             <li><h2 >Page 4</h2>
                 <h4>This page allows you to see the existing tests, and eventually edit one. </h4>
@@ -36,7 +36,7 @@
                 <h4>Here you can create a new user with an individual id - user that is about to take the test. </h4>
             </li> 
             <li><h2 >Page 6</h2>
-                <h4>Here you can find listed all the users created, arranged by DC .A test can be assigned by the selector "Select quiz", you will get a random generated code for the end user to start the test. On this page you can change the time for a test and also see the results.  </h4>
+                <h4>Here you can find listed all the users created, arranged by DC. A test can be assigned by the selector "Select quiz", you will get a randomly generated code for the end user to start the test. On this page, you can change the time for a test and also see the results.</h4>
             </li>
             <li><h2 >Page 7</h2>           
                 <h4>You can start a short demo. Click on the Start Test to begin it. </h4>
@@ -271,6 +271,7 @@
     </div>
     <div id="menu6" class="tab-pane fade">
         <h3>The code from Page6 can be used on the front page to login. Click on "Start Test" to begin a Demo</h3>
+
 
         <div Style="background: #02C54C;padding: 10%;">        
 
