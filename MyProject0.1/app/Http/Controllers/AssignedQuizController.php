@@ -76,8 +76,16 @@ class AssignedQuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request) {
-        $temp = $request->code;
-
+        $temp = $request->code;      
+        if ($temp == 'Thisisademocode') {
+            return view('/DemoPage');
+        }
+        if($temp=='demotest')
+        {
+            return redirect()->to('/Thisisademocode/demotest/StartTestPage')->with('message', 'Good Luck');
+            
+            
+        }
         if ($assignedquiz = AssignedQuiz::where("code", $temp)->first()) {
             $quiz = Quiz::where("id", $assignedquiz->quiz_id)->first();
             if ($assignedquiz->time == 0) {

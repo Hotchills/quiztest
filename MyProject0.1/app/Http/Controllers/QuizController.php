@@ -9,6 +9,7 @@ use App\Answer;
 use App\GuestUser;
 use App\AssignedQuiz;
 use App\CorrectAnswers;
+use App\UserAnswer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -30,10 +31,13 @@ class QuizController extends Controller {
     }
 
     public function startquiz($code, $main) {
-        //
+        //        
+
+
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
             $assign = AssignedQuiz::where("code", $code)->first();
+
             if ($assign->start_at == NULL) {
                 $assign->start_at = Carbon::now();
                 $assign->save();
@@ -41,6 +45,10 @@ class QuizController extends Controller {
             $timeleft = Carbon::now()->diffInSeconds($assign->start_at);
             //   $timeleft = gmdate("H:i:s", $timeleft);
             //   $timeleft = $timeleft/60;
+            if ($timeleft == 86399)
+                $timeleft = 1;
+
+            //  return redirect()->back()->with('message', $timeleft);
             if ($timeleft / 60 > $assign->time || $assign->time == 0) {
                 return redirect()->to('/' . $code . '/FinishTest');
             } else
@@ -50,6 +58,13 @@ class QuizController extends Controller {
     }
 
     public function starttestpage($code, $main) {
+        if ($code == 'Thisisademocode' && $main = 'demotest') {
+            $assign = AssignedQuiz::where("code", $code)->first();
+            $assign->start_at = NULL;
+            $assign->time=30;
+            $assign->save(); 
+            $useranswers= UserAnswer::where('user_id',$assign->guestuser_id)->delete();
+        }
 
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
@@ -110,12 +125,11 @@ class QuizController extends Controller {
     public function store(Request $request) {
         $validatedData = $request->validate([
             'title' => 'required|unique:quizzes|max:100|min:3',
-            'name' => 'required|unique:quizzes|max:40|min:3',
+            'name' => 'required|alpha_num|unique:quizzes|max:40|min:3',
             'body' => 'max:500',
         ]);
-
         $quiz = new Quiz();
-        $quiz->name = $request->name;
+        $quiz->name = preg_replace('/[\x00-\x1F\x7F\xA0]/u', '', $request->name);
         $quiz->title = $request->title;
         $quiz->body = $request->body;
         $quiz->save();

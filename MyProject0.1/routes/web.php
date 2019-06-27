@@ -14,7 +14,8 @@
 Route::get('/ThisIsJustALink/{question_id}','PlayController@index');
 Route::get('/ThisIsJustALinkForResults/{question_id}','PlayController@resultsplay');
 Route::post('/SavePlay',['uses' => 'PlayController@saveplay','as'=>'play.save' ]);
-
+//demo
+Route::get('/Demo','PlayController@demo');
 
 Route::post('/AssignedQuiz', ['uses'=> 'AssignedQuizController@store','as'=>'assignedquiz.store' ]);
 Route::post('/CreateQuiz', ['uses'=> 'QuizController@store','as'=>'quiz.store' ]);
@@ -39,7 +40,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/LoginUser', 'AssignedQuizController@index')->name('LoginUser');
 Route::get('/CreateQuiz', 'QuizController@index')->name('CreateQuiz');
 Route::get('/CreateGuestUser', 'GuestUserController@index')->name('CreateGuestUser');
-Route::get('/ListUser', 'GuestUserController@showusers')->name('ListGuestUser');
+Route::get('/{location}/ListUser', 'GuestUserController@showusers')->name('ListGuestUser');
 Route::get('/{main}/CreateQuestion', 'QuestionController@index')->name('CreateQuestion');
 Route::get('/{code}/FinishTest', 'AssignedQuizController@finishtest');
 Route::get('/{main}','QuizController@geteditquiz');
