@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <title>{{ config('app.name', 'Godaddy DCOps') }}</title>
+
 <div class="card ">
     <div class="card-header">Dashboard</div>
 
