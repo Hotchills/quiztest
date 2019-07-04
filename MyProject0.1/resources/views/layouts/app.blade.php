@@ -230,7 +230,7 @@
             </nav>
 
             <main class="py-4">
-                <div class="center ">
+                <div class="center">
                     <div class="col-md-8">
                         @if (session()->has('message'))
                         <div class="alert alert-success">
