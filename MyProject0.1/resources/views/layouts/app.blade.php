@@ -120,9 +120,7 @@
                 margin:auto;
                 width: 70%;
                 top:50%;
-                border:solid 1px;
-
-            }
+                     }
 
             /*Flip Main page*/
             /*dropdown menu*/
@@ -231,7 +229,7 @@
             </nav>
 
             <main class="py-4">
-                <div class=" row justify-content-center ">
+                <div class="center ">
                     <div class="col-md-8">
                         @if (session()->has('message'))
                         <div class="alert alert-success">
@@ -241,7 +239,7 @@
 
                         @if ($errors->any())
                         <div class="alert alert-danger">
-                            <ul>
+                            <ul> 
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                                 @endforeach
