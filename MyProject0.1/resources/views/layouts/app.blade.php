@@ -183,7 +183,7 @@
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel"Style="padding-left:15%;padding-right:15%;background:#00a63f;box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);">
              
-                    <a href="{{ url('/') }}">     <img  src="/images/Mainpage/logo-smal.png" height="50px"/>
+                    <a href="{{ url('/') }}">     <img  src="/images/Mainpage/header.jpg"/>
                          </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
