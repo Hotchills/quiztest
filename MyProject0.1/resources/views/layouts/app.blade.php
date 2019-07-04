@@ -118,6 +118,7 @@
             /*General Center*/
             .center {
                 margin:auto;
+                Right: 20%;
                 width: 70%;
                 top:50%;
                      }
@@ -239,7 +240,7 @@
 
                         @if ($errors->any())
                         <div class="alert alert-danger">
-                            <ul> 
+                            <ul>
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                                 @endforeach
