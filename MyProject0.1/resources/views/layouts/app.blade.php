@@ -110,10 +110,9 @@
             .center_register {
 
                 margin: auto;
-                width: 70%;
-                top:40%;
+                width: 50%;
+                top: 80%;
 
-            }
 
             /*General Center*/
             .center {
