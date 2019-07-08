@@ -112,7 +112,7 @@
                 margin: auto;
                 width: 50%;
                 top: 80%;
-
+            }
 
             /*General Center*/
             .center {
