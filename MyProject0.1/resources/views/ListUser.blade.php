@@ -40,7 +40,8 @@
                                     <option>Select quiz</option>
 
                                     @foreach($quizzes as $quiz)
-                                    <option value="{{ $quiz->id }}" > {{ $quiz->name }} </option>
+                                    
+                                    <option value="{{ $quiz->id }}" >{{ $quiz->title }} (URL: {{ $quiz->name }}) </option>
                                     @endforeach    
                                 </select>
                             </div>
@@ -64,7 +65,7 @@
                                     <strong>{{ $assigned->quiz->name }} (</strong> {{ $assigned->code }}<strong> )</strong> @if($assigned->grade>0)<strong> Grade: </strong>{{ $assigned->grade }}% -> <a href='/grade/{{$assigned->code}}'>Check results</a>@endif
                                     Time: <strong>{{$assigned->time}}</strong> min 
                                 </div>
-                                <div class="col-md-4 col-xs-4 col-sm-4">
+                                <div class="col-md-3 col-xs-3 col-sm-3">
                                     <form action='/UpdateTime' method="POST" >
                                         {{ csrf_field() }}
                                        
@@ -74,7 +75,13 @@
                                             Save
                                         </button>
                                     </form>
-                                </div>
+                                    </div>
+                                  <div class="col-md-1 col-xs-1 col-sm-1">
+                                    {{ Form::open(['method' => 'DELETE', 'route' => ['delassignedquiz.delete', $guestuser->id,$assigned->quiz->id]]) }}
+                                    {{ Form::submit('Delete',['class'=>'btn btn-danger btn-dropdown btn-fordropdown'])}} 
+                                    {{ Form::close() }}
+                                  </div>  
+                                
                             </div>
                         </li>
                         @endforeach                  

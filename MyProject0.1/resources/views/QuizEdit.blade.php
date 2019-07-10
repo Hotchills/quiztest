@@ -8,13 +8,16 @@
         <li class="row">
             <div class="col-sm-10 col-md-10 col-xs-10 "> 
             <div  id="EditQuizText{{$quiz->id}}">
-                <h1>Name: <strong> {{$quiz->name}}</strong></h1>
-                <h1>{{$quiz->title}}</h1>
+                
+                <h1> <strong>{{$quiz->title}} </strong></h1>
                 <p>{{$quiz->body}}</p> 
+                
+                <h6>Name: <strong> {{$quiz->name}}</strong></h6>
             </div>
                 <div id="EditQuizTextForm{{$quiz->id}}" Style="display:none;">
                      {{ Form::open(['method' => 'PUT', 'route' => ['quiz.update']]) }}
                             {{Form::hidden('quizID',$quiz->id)}}
+                            
                             {{ Form::textarea('quizTITLE',$quiz->title,['class'=>'form-control textarea','rows'=>'1'])}}
                             {{ Form::textarea('quizBODY',$quiz->body,['class'=>'form-control textarea','rows'=>'1'])}}
                             {{ Form::textarea('quizNAME',$quiz->name,['class'=>'form-control textarea','rows'=>'1'])}}
@@ -164,6 +167,17 @@
     document.getElementById('EditQuestionButton' + temp).style.display = "block";
     document.getElementById('EditQuestionTextForm' + temp).style.display = "none";
     document.getElementById('EditQuestionText' + temp).style.display = "block";
+    }
+    
+    function QuizEdit(temp) {
+    document.getElementById('EditQuizButton' + temp).style.display = "none";
+    document.getElementById('EditQuizTextForm' + temp).style.display = "block";
+    document.getElementById('EditQuizText' + temp).style.display = "none";
+    }
+    function QuizCancelEdit(temp) {
+    document.getElementById('EditQuizButton' + temp).style.display = "block";
+    document.getElementById('EditQuizTextForm' + temp).style.display = "none";
+    document.getElementById('EditQuizText' + temp).style.display = "block";
     }
 
     function AnswerEdit(temp) {

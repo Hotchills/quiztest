@@ -61,5 +61,5 @@ Route::delete('/DelAnswersToQuestion/{id}', 'AnswerController@destroy')->name('d
 Route::delete('/DelCorrectAnswersToQuestion/{id}', 'CorrectAnswersController@destroy')->name('delcorrectanswer.delete');
 Route::delete('/delquestion/{id}', 'QuestionController@destroy')->name('delquestion.delete');
 Route::delete('/delquiz/{id}', 'QuizController@destroy')->name('delquiz.delete');
-
+Route::delete('/delassignedquiz/{id}/{quizid}', 'AssignedQuizController@destroy')->name('delassignedquiz.delete');
 

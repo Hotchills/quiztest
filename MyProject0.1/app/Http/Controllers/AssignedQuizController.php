@@ -83,8 +83,7 @@ class AssignedQuizController extends Controller {
         if($temp=='demotest')
         {
             return redirect()->to('/Thisisademocode/demotest/StartTestPage')->with('message', 'Good Luck');
-            
-            
+                        
         }
         if ($assignedquiz = AssignedQuiz::where("code", $temp)->first()) {
             $quiz = Quiz::where("id", $assignedquiz->quiz_id)->first();
@@ -151,9 +150,7 @@ class AssignedQuizController extends Controller {
      * @param  \App\AssignedQuiz  $assignedQuiz
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AssignedQuiz $assignedQuiz) {
-        //
-    }
+
 
     public function updatetime(Request $request) {
 
@@ -168,5 +165,16 @@ class AssignedQuizController extends Controller {
 
         return redirect()->back()->withErrors('can`t save the time');
     }
+        public function destroy($id,$quizid) {
+            
+        if($quiz =AssignedQuiz::where([["guestuser_id",$id],["quiz_id",$quizid]])->first()){
+          AssignedQuiz::destroy($quiz->id);
+        return redirect()->back()->with('message', 'Removed');
+        }
+        else
+             return redirect()->back()->with('message', $id );
+            return redirect()->back()->withErrors('$quizid');
+    }
+
 
 }

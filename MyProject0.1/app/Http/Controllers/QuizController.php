@@ -139,17 +139,21 @@ class QuizController extends Controller {
 
     public function destroy($id) {
 
-        Quiz::destroy($id);
-
+        if(Quiz::destroy($id))
         return redirect()->back()->with('message', 'Quiz has been deleted');
+        else
+            return redirect()->back()->withErrors('Bad quiz ID');
     }
     
      public function update(Request $request) {
  
-        if(Quiz::where('id',$request->quizID)->update(['body'=>$request->quizBODY]))
+        if(Quiz::where('id',$request->quizID)->update(['body'=>$request->quizBODY])){
+          Quiz::where('id',$request->quizID)->update(['title'=>$request->quizTITLE]);
+          Quiz::where('id',$request->quizID)->update(['name'=>$request->quizNAME]);
   
-        return redirect()->back()->with('message', 'Quiz edited'); 
-        else          
+       
+        return redirect()->to('/edit/' . $request->quizNAME)->with('message', 'Quiz edited');
+        }else          
          return redirect()->back()->withErrors('Bad quiz ID');
         }
 
