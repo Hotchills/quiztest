@@ -59,11 +59,13 @@ class QuizController extends Controller {
 
     public function starttestpage($code, $main) {
         if ($code == 'Thisisademocode' && $main = 'demotest') {
-            $assign = AssignedQuiz::where("code", $code)->first();
-            $assign->start_at = NULL;
+           if( $assign = AssignedQuiz::where("code", $code)->first()){
+            if($assign->start_at!=NULL)
+                   $assign->start_at = NULL;
             $assign->time=30;
             $assign->save(); 
             $useranswers= UserAnswer::where('user_id',$assign->guestuser_id)->delete();
+           }
         }
 
         if ($quiz = Quiz::where('name', $main)->first()) {

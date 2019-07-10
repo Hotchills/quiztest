@@ -226,7 +226,7 @@
 
     </nav>
 
-    <main class="container p-0" Style="background-color:transparent;">
+    <main class="container p-0 border-0" Style="background-color:transparent;">
 
                 @if (session()->has('message'))
                     <div class="alert alert-success">
