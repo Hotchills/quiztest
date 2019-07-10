@@ -71,7 +71,7 @@ class QuizController extends Controller {
         if ($quiz = Quiz::where('name', $main)->first()) {
             $questions = $quiz->question;
 
-            $assign = AssignedQuiz::where("code", $code)->first();
+            if($assign = AssignedQuiz::where("code", $code)->first())
             if ($assign->time == 0) {
                 return redirect()->to('/' . $code . '/FinishTest');
             }
