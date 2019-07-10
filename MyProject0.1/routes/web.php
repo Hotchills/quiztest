@@ -52,6 +52,7 @@ Route::get('{question}/AddAnswersToQuestion', 'AnswerController@index')->name('a
 //update 
 Route::put('/AddCorrectAnswersToQuestion/{id}', 'CorrectAnswersController@store')->name('correctanswer.store');
 Route::put('/Useranswer/{id}', 'UserAnswerController@update')->name('useranswer.update');
+Route::put('/UpdateQuiz', 'QuizController@update')->name('quiz.update');
 Route::put('/UpdateQuestion', 'QuestionController@update')->name('question.update');
 Route::put('/UpdateAnswer', 'AnswerController@update')->name('answer.update');
 

@@ -143,5 +143,14 @@ class QuizController extends Controller {
 
         return redirect()->back()->with('message', 'Quiz has been deleted');
     }
+    
+     public function update(Request $request) {
+ 
+        if(Quiz::where('id',$request->quizID)->update(['body'=>$request->quizBODY]))
+  
+        return redirect()->back()->with('message', 'Quiz edited'); 
+        else          
+         return redirect()->back()->withErrors('Bad quiz ID');
+        }
 
 }
