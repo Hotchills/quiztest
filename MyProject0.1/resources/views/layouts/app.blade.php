@@ -226,9 +226,8 @@
 
     </nav>
 
-    <main class="py-4">
-        <div class="center">
-            <div class="col-md-8">
+    <main class="container p-0" Style="background-color:transparent;">
+
                 @if (session()->has('message'))
                     <div class="alert alert-success">
                         {{ session()->get('message') }}
@@ -245,7 +244,6 @@
 
                 @yield('content')
 
-            </div>
-        </div>
+</main>
     </body>
 </html>

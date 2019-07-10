@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
-<h2 id="popmes" Style="border-radius: 25px;width:60%;;padding:5%;  margin:18%; ;background: white;z-index: 12;position:absolute;display:none;">Please click back on this page in 30 sec or the test will close.</h2>
-
+<div clas="container p-0">
+<h2 id="popmes" Style="border-radius: 25px;width:30%;;padding:5%;  margin:10%; ;background: white;z-index: 12;position:absolute;display:none;">Please click back on this page in 30 sec, or the test will close.</h2>
+</div>
 <div class="quiz-box card">
     <div class="card-header">
         @auth
@@ -107,7 +107,7 @@ var interval_id=0;
     function blurpage(){
         if(seconds > 0 ){
              seconds -= 1; 
-                 el.innerText = "Please click back on this page in  " + seconds + " sec or the test will close.";
+                 el.innerText = "Please click back on this page in  " + seconds + " sec, or the test will close.";
    
         }else{ clearInterval(interval_id);
         
@@ -138,7 +138,7 @@ var interval_id=0;
         console.log(interval_id);
         clearInterval(interval_id);
         interval_id=0;
-        el.innerText = "Please click back on this page in 30 sec or the test will close.";
+        el.innerText = "Please click back on this page in 30 sec, or the test will close.";
         if (!interval_id){  
           document.getElementById("blur").style.display  = "none";
         //  document.getElementById("div1").style.display  = "none";

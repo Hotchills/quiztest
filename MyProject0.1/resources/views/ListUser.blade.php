@@ -65,7 +65,7 @@
                                     <strong>{{ $assigned->quiz->name }} (</strong> {{ $assigned->code }}<strong> )</strong> @if($assigned->grade>0)<strong> Grade: </strong>{{ $assigned->grade }}% -> <a href='/grade/{{$assigned->code}}'>Check results</a>@endif
                                     Time: <strong>{{$assigned->time}}</strong> min 
                                 </div>
-                                <div class="col-md-3 col-xs-3 col-sm-3">
+                                <div class="col-md-2 col-xs-2 col-sm-2">
                                     <form action='/UpdateTime' method="POST" >
                                         {{ csrf_field() }}
                                        
@@ -76,7 +76,7 @@
                                         </button>
                                     </form>
                                     </div>
-                                  <div class="col-md-1 col-xs-1 col-sm-1">
+                                  <div class="col-md-2 col-xs-2 col-sm-2">
                                     {{ Form::open(['method' => 'DELETE', 'route' => ['delassignedquiz.delete', $guestuser->id,$assigned->quiz->id]]) }}
                                     {{ Form::submit('Delete',['class'=>'btn btn-danger btn-dropdown btn-fordropdown'])}} 
                                     {{ Form::close() }}
