@@ -88,7 +88,7 @@
             }
             .center_login {
 
-                margin: auto;
+                margin:0 auto;
                 width: 50%;
                 top: 20%;
             }
@@ -105,13 +105,13 @@
             <input type="radio"  />
             <div class="card" >
                 <div class="thefront"><img src="images/Mainpage/logo-flip.png"></div>
-                <div class="theback" >               
-                    <div class="center_login container" >
+                <div class="theback " >               
+                    <div class="center_login container p-0" >
 
                         {{Form::open(['route'=>'loginguestuser.show','method'=>'POST'])}}
                         {{Form::label('code','Insert Code:')}}
                         <br>
-                        {{Form::text('code','',['class'=>'form-control'])}}
+                        {{Form::text('code','',['class'=>'form-control ','Style'=>'width: 90%; margin:0 auto;'])}}
                         <br>
                         <div class="center_login" >
                             {{Form::submit('Start Test',['class'=>'btn btn-warning'])}}

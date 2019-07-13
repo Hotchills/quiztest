@@ -72,7 +72,7 @@
         </tbody>
     </table>
 </div>
-<h2>Test list :</h2>
+<h2>Questionary list :</h2>
 <br>
 
 
