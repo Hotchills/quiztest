@@ -25,7 +25,7 @@
                 <li class="row "> 
 
                     <div class="col-sm-9 col-md-9 col-xs-9">
-                        <h2><a href="/{{$quiz->name}}">{{$quiz->title}}</a></h2>
+                        <h2><a href="/{{$quiz->name}}">{{$quiz->title}}</a></h2><span>(URL: {{ $quiz->name }}) </span>
 
                     </div>
                     <div  class="col-sm-1 col-md-1  col-xs-1 btn-sm">

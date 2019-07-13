@@ -20,20 +20,36 @@ class GuestUserController extends Controller {
 
     public function showusers($location) {
         //
+
         if ($location == "ALL") {
             if ($guestusers = GuestUser::all()) {
                 if ($quizzes = Quiz::all()) {
-                    return view('ListUser', compact('guestusers', 'quizzes', 'location'));
+                    return view('ListUsers', compact('guestusers', 'quizzes', 'location'));
                 }
             }
         }
 
         if ($guestusers = GuestUser::where('info1', $location)->get()) {
             if ($quizzes = Quiz::all()) {
-                return view('ListUser', compact('guestusers', 'quizzes', 'location'));
+                return view('ListUsers', compact('guestusers', 'quizzes', 'location'));
             }
         }
         abort(404);
+    }
+  public function showuser($id) {
+      
+      $guestusers = GuestUser::where('id', $id)->get();
+      $quizzes = Quiz::all();
+      $location='All';
+       return view('ListUser', compact('guestusers', 'quizzes','location'));
+  }
+    public function search(Request $request) {
+        $keywords=$request->name;
+        $guestusers = GuestUser::where('email', $request->name)->get();
+        $quizzes = Quiz::all();
+        $location='ALL';
+         
+        return view('ListUser', compact('guestusers', 'quizzes','location'));
     }
 
     public function store(Request $request) {
@@ -49,7 +65,6 @@ class GuestUserController extends Controller {
         $GuestUser = new GuestUser();
         $GuestUser->email = $request->email;
         $GuestUser->password = str_random(8);
-        ;
         $GuestUser->code = 0;
         $GuestUser->info1 = $request->location;
         $GuestUser->info2 = 0;
